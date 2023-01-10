@@ -621,15 +621,25 @@ pop_many_patches()
 		# remove the patches refs
 		tail -n $2 < "$applied" | remove_patch_refs
 
-		git reset --hard "$1" > /dev/null
-
 		n=`wc -l < "$applied"`
 		n=$(( n - $2 ))
 		head_n "$n" < "$applied" > "$applied.tmp"
+		if [ `wc -l < "$applied.tmp"` = 0 ]
+		then
+			msg="popping all $2 patches"
+		elif [ $2 = 1 ]
+		then
+			msg="popping a patch: now at `tail -1 \"$applied.tmp\"`"
+		else
+			msg="popping $2 patches: now at `tail -1 \"$applied.tmp\"`"
+		fi
+
+		GIT_REFLOG_ACTION="$GIT_REFLOG_ACTION: $msg" git reset --hard "$1" > /dev/null
+
 		mv "$applied.tmp" "$applied"
 		if [ -z "`get_top 2>/dev/null`" ] && [ "`git symbolic-ref HEAD`" = "refs/heads/$GUILT_PREFIX$branch" ] && ! $old_style_prefix
 		then
-			git symbolic-ref HEAD refs/heads/$branch
+			git symbolic-ref -m "$GIT_REFLOG_ACTION: restoring branch $branch" HEAD refs/heads/$branch
 			git update-ref -d refs/heads/$GUILT_PREFIX$branch
 		fi
 	)
