@@ -1,0 +1,28 @@
+guilt-rename(1)
+=============
+
+NAME
+----
+guilt-rename - Rename a patch
+
+SYNOPSIS
+--------
+include::usage-guilt-rename.txt[]
+
+OPTIONS
+-------
+<oldname>::
+	Name of the patch to be renamed. If not specified, use the top-most patch.
+
+<newname>::
+	New name of the patch.
+
+Author
+------
+Written by Viacheslav Galaktionov <slavka@slavkin.site>
+
+Documentation
+-------------
+Documentation by Viacheslav Galaktionov <slavka@slavkin.site>
+
+include::footer.txt[]
