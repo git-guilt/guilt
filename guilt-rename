@@ -31,8 +31,9 @@ fi
     [ -f "$GUILT_DIR/$branch/$new_name" ] &&
         die "Patch \"$new_name\" already exists"
 
-    [ ! valid_patchname "$new_name" ] &&
+    if ! valid_patchname "$new_name"; then
         die "The specified patch name is invalid according to git-check-ref-format(1)."
+    fi
 
     mv "$GUILT_DIR/$branch/$old_name" "$GUILT_DIR/$branch/$new_name"
 
