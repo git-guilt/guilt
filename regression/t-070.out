@@ -1,3 +1,6 @@
 % setup_git_repo
 % guilt init
+unset_guards 1
+foo.patch #+bar # this is just a comment -foo
+bar.patch #+bar
 All tests passed!

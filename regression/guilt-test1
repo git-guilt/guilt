@@ -91,6 +91,15 @@ if [ "$out" != "foo.patch" ]; then
 	exit 1
 fi
 
+# check unset_guards
+cat > "$series" <<EOF
+foo.patch #+bar #-foo # this is just a comment -foo #+baz
+bar.patch #+bar
+EOF
+echo "unset_guards 1"
+unset_guards foo.patch -foo +baz
+cat "$series"
+
 rm -f "$series"
 
 echo "All tests passed!"

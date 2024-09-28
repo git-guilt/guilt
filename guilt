@@ -387,30 +387,27 @@ unset_guards()
 	(
 		p="$1"
 		shift
-		for x in "$@"; do
-			awk -v pname="$p" -v oldguard="$x" '{
-if ($1 == pname) {
+		# pass all guards as a single "oldguardslist" variable
+		awk -v pname="$p" -v oldguardslist="$*" "$awk_patch"'{
+if (patch($0) == pname) {
+	len = split(oldguardslist, list);
+	for (i=1; i<=len; i++) {
+		g = list[i];
+		oldguards["#" g] = 1;
+	}
 	guards = "";
-
-	for(i=2; i<=NF; i++) {
-		if ($i == "#" oldguard)
-			continue;
-
-		if (length(guards))
-			guards = guards " " $i;
-		else
-			guards = $i;
+	len = split(substr($0, end), list);
+	for (i=1; i<=len; i++) {
+		g = list[i];
+		if (!match(g, /^#[+-]/) || oldguards[g] == "")
+			guards = guards " " g;
 	}
 
-	if (length(guards))
-		print $1 " " guards;
-	else
-		print $1;
+	print pname guards
 } else
 	print $0;
 }' < "$series" > "$series.tmp"
-			mv "$series.tmp" "$series"
-		done
+		mv "$series.tmp" "$series"
 	)
 }
 
