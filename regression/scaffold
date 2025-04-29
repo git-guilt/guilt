@@ -130,9 +130,6 @@ function setup_guilt_repo
 	# the status file
 	touch .git/patches/master/status
 
-	# the status file
-	touch .git/patches/master/status
-
 	touch -a -m -t "$TOUCH_DATE" .git/patches/master/modify
 	touch -a -m -t "$TOUCH_DATE" .git/patches/master/add
 	touch -a -m -t "$TOUCH_DATE" .git/patches/master/remove
