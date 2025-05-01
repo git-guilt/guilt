@@ -28,6 +28,10 @@ Log file:	$LOGFILE
 Repo dir:	"$REPODIR"
 
 DONE
+	if [ -n "$GITHUB_ACTIONS" ]
+	then
+		cat $LOGFILE
+	fi
 	exit 1
 }
 
