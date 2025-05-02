@@ -3,7 +3,7 @@
 # Copyright (c) Josef "Jeff" Sipek, 2006-2013
 #
 
-USAGE="[-k] <patchname>"
+USAGE="[-k] [<patchname>]"
 if [ -z "$GUILT_VERSION" ]; then
 	echo "Invoking `basename "$0"` directly is no longer supported." >&2
 	exit 1
@@ -17,11 +17,24 @@ if [ "${1:-}" = "-k" ]; then
 	shift
 fi
 
-if [ $# -ne 1 ]; then
+if [ $# -gt 1 ]; then
 	usage
 fi
 
-patch="${1:-}"
+if [ $# -eq 0 ]; then
+	n=`wc -l < "$applied"`
+	n=`expr $n + 1`
+
+	if [ $n -gt `get_series | wc -l` ]; then
+		die "No unapplied patch to fold."
+	fi
+
+	patch="`get_series | sed -n -e ${n}p`"
+	echo Selected patch $patch
+else
+	patch="${1:-}"
+fi
+
 if [ -z "$patch" ]; then
 	die "No patch name supplied."
 fi

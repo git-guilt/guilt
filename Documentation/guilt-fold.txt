@@ -3,11 +3,18 @@ guilt-fold(1)
 
 NAME
 ----
-guilt-fold - Fold a specified patch into the topmost applied patch
+guilt-fold - Fold a patch into the topmost applied patch
 
 SYNOPSIS
 --------
 include::usage-guilt-fold.txt[]
+
+DESCRIPTION
+-----------
+Fold the named patch (or the first unapplied patch if no name is
+supplied) into the topmost applied patch.  The commit messages of both
+patches are retained in the topmost patch; the message typically needs
+to be edited afterwards.
 
 OPTIONS
 -------

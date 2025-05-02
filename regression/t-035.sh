@@ -59,3 +59,43 @@ for using_diffstat in true false; do
 		done
 	done
 done
+
+# Test that "guilt fold" (without a filename) selects the next patch
+# in the series.  First, create a series of 10 patches.
+function create_n
+{
+	cmd guilt new $1
+	echo $1 > number.txt
+	git add number.txt
+	cmd guilt ref
+	fixup_time_info $1
+}
+
+function ensure
+{
+	cmd test `cat number.txt` -eq $1
+}
+
+for i in `seq 10`
+do
+	create_n $i
+done
+
+cmd guilt pop -a
+cmd guilt push -n 4
+cmd guilt fold
+ensure 5
+fixup_time_info 4
+cmd list_files
+cmd guilt fold
+ensure 6
+fixup_time_info 4
+cmd list_files
+cmd guilt push
+ensure 7
+cmd guilt push -a
+ensure 10
+# We can't fold a non-existing patch.
+shouldfail guilt fold
+cmd list_files
+ensure 10
