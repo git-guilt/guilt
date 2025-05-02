@@ -16,7 +16,7 @@ Removes the files specified from git using git-rm(1).
 OPTIONS
 -------
 <files>::
-	Files to add
+	Files to remove
 
 Author
 ------
