@@ -19,6 +19,8 @@ Patches directory doesn't exist, try guilt init
 Patches directory doesn't exist, try guilt init
 % guilt fork
 Patches directory doesn't exist, try guilt init
+% guilt goto
+Patches directory doesn't exist, try guilt init
 % guilt graph
 Patches directory doesn't exist, try guilt init
 % guilt header

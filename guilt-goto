@@ -1,0 +1,143 @@
+#!/bin/sh
+#
+# Copyright (c) Per Cederqvist, 2026
+# Copyright (c) Josef "Jeff" Sipek, 2006-2013
+#
+
+USAGE="[ -f ] [ -r ] -n <num> | <patchname>"
+if [ -z "$GUILT_VERSION" ]; then
+	echo "Invoking `basename "$0"` directly is no longer supported." >&2
+	exit 1
+fi
+
+_main() {
+
+abort_flag="abort"
+exact=false			# Only try exact match for the name.
+while [ $# -gt 0 ]; do
+	case "$1" in
+		-f)
+			abort_flag=""
+			;;
+		-r)
+			repush=t
+			;;
+		-n)
+			num=t
+			;;
+		*)
+			break
+			;;
+	esac
+	shift
+done
+
+if [ $# -ne 1 ]; then
+	usage
+fi
+
+patch="$1"
+
+# Make sure that there are no unapplied changes.
+if ! must_commit_first; then
+	die "Uncommited changes detected. Refresh first."
+fi
+
+if [ -n "$repush" ]; then
+	guilt pop -a
+fi
+
+sidx=`wc -l < "$applied"`
+if [ -n "$num" ]; then
+	# As a special case, "guilt goto -n 0" is equivalent to "guilt
+	# pop -a".
+	if [ "$patch" = "0" ]; then
+		guilt pop -a
+		exit
+	fi
+
+	# We are supposed to go to patch number $patch.  Note that
+	# this number refers to the full series, regardless of which
+	# guards are applied, so we have to convert it to a number
+	# from what get_series returns.  We do that by simply
+	# replacing it with the patch name, and use that below.
+
+	# As a side effect, non-integer values for "$patch" will cause
+	# "[" to fail.  That means it is safe to use $patch as a sed
+	# address below.
+	[ "$patch" -gt 0 ] || die "Invalid patch number to go to."
+
+	p=`get_full_series|sed -n "${patch}p"`
+
+	[ -z "$p" ] && die "Not enough patches in series."
+	patch=$p
+	exact=true
+fi
+
+# We are supposed to go to a particular patch.  Attempt to
+# find it.  Try an exact match first.
+eidx=`get_series | grep -n -x -F "$patch" | cut -d: -f1`
+
+# No exact match found.  Try an anchored regexp search.
+if [ -z "$eidx" ] && ! $exact; then
+	eidx=`get_series | grep -n -x -e "$patch" | cut -d: -f1`
+fi
+
+# No regexp matach found. Try an unanchored regexp search.
+if [ -z "$eidx" ] && ! $exact; then
+	eidx=`get_series | grep -n -e "$patch" | cut -d: -f1`
+fi
+
+if [ -z "$eidx" ]; then
+	die "Patch $patch is not in the series or is guarded."
+fi
+
+if [ `echo "$eidx" | wc -l` -gt 1 ]; then
+	# Multiple matches of the same category. Bail out, but show
+	# the matches to the user in a way that is easy to
+	# cut-n-paste.
+	echo "Multiple patches match:" >&2
+	for c in $eidx; do
+		name=`get_series | sed -n ${c}p`
+		number=`get_full_series | grep -n -x -F "$name" | cut -d: -f1`
+		echo "   guilt goto -n $number # $name" >&2
+	done
+	die "Please provide a unique pattern"
+fi
+
+if [ $sidx -lt $eidx ]
+then
+	# Push some patches, starting at the first unapplied patch.
+	sidx=`expr $sidx + 1`
+	get_series | sed -n -e "${sidx},${eidx}p" | while read p
+	do
+		disp "Applying patch..$p"
+		if [ ! -f "$GUILT_DIR/$branch/$p" ]; then
+			die "Patch $p does not exist. Aborting."
+		fi
+
+		push_patch "$p" $abort_flag
+
+		# Bail if necessary.
+		if [ $? -eq 0 ]; then
+			disp "Patch applied."
+		elif [ -z "$abort_flag" ]; then
+			die "Patch applied with rejects. Fix it up, and refresh."
+		else
+			die "To force apply this patch, use 'guilt push -f'"
+		fi
+	done
+elif [ $sidx -gt $eidx ]; then
+	# Pop some patches.
+	l=`awk "BEGIN{n=0}(n==$eidx){print \\$0; exit}{n=n+1}END{}" < "$applied"`
+
+	pop_many_patches `git rev-parse refs/patches/$branch/$l^` `expr $sidx - $eidx`
+
+	p=`get_top`
+	[ ! -z "$p" ] && disp "Now at $p." || disp "All patches popped."
+else
+	p=`get_top`
+	disp "Already at $p"
+fi
+}
+

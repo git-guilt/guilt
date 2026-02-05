@@ -1,0 +1,50 @@
+guilt-goto(1)
+=============
+
+NAME
+----
+guilt-goto - Push or pop patches to reach a named patch
+
+SYNOPSIS
+--------
+include::usage-guilt-goto.txt[]
+
+OPTIONS
+-------
+-f::
+	Force push the first patch that doesn't apply cleanly
+
+-r::
+	Pop all patches and then push required patches
+
+-n <num>::
+	Go to patch number <num> instead of a named patch.  (Hint:
+	use `guilt series -n` to see the number of each patch.)
+
+<patchname>::
+	Go to this patch.  This tries, in order, an exact match, a
+	substring match, an anchored regular expression (see "+grep -x
+	-e`" for details), and an unanchored regular expression (see
+	"+grep -e+").  The first attemp that matches at least one
+	patch is used.  If more than one patch matches, list the
+	patches and exit with a failure.
+
+
+If the "+-r+" option is used, this is equivalent to "+guilt pop -a+"
+followed by "+guilt push+" with the rest of the arguments given to
+"+guilt goto+".  If the "+-r+" option is not used, this command pops or
+pushes patches until the named patch is the top-most patch.  (This can
+end up on the wrong patch if you have edited the series file
+manually.  If so, use the "+-r+" option to resynchronize.)
+
+Author
+------
+Written by Per Cederqvist <ceder@lysator.liu.se>, borrowing heavily
+from the "guilt-push" and "guilt-pop" scripts which were written by
+Josef "Jeff" Sipek <jeffpc@josefsipek.net>.
+
+Documentation
+-------------
+Documentation by Per Cederqvist <ceder@lysator.liu.se>.
+
+include::footer.txt[]
