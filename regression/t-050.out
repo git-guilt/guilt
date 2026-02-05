@@ -9,6 +9,16 @@ mode
   add
   remove
   mode
+% guilt series -n
+     1	modify
+     2	add
+     3	remove
+     4	mode
+% guilt series -n -v
+     1	  modify
+     2	  add
+     3	  remove
+     4	  mode
 % guilt push
 Applying patch..modify
 Patch applied.
@@ -17,6 +27,11 @@ Patch applied.
   add
   remove
   mode
+% guilt series -v -n
+     1	= modify
+     2	  add
+     3	  remove
+     4	  mode
 % guilt push
 Applying patch..add
 Patch applied.
@@ -25,6 +40,11 @@ Patch applied.
 = add
   remove
   mode
+% guilt series -v -n
+     1	+ modify
+     2	= add
+     3	  remove
+     4	  mode
 % guilt push
 Applying patch..remove
 Patch applied.
@@ -33,6 +53,11 @@ Patch applied.
 + add
 = remove
   mode
+% guilt series -v -n
+     1	+ modify
+     2	+ add
+     3	= remove
+     4	  mode
 % guilt push
 Applying patch..mode
 Patch applied.
@@ -41,6 +66,11 @@ Patch applied.
 + add
 + remove
 = mode
+% guilt series -v -n
+     1	+ modify
+     2	+ add
+     3	+ remove
+     4	= mode
 % list_files
 d .git/patches
 d .git/patches/master

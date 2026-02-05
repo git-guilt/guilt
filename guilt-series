@@ -3,7 +3,7 @@
 # Copyright (c) Josef "Jeff" Sipek, 2006-2013
 #
 
-USAGE="[-v | -g | -e]"
+USAGE="[-v | -g | -e | -n]"
 if [ -z "$GUILT_VERSION" ]; then
 	echo "Invoking `basename "$0"` directly is no longer supported." >&2
 	exit 1
@@ -20,6 +20,8 @@ do
 		gui=t ;;
 	-e)
 		edit=t ;;
+	-n)
+		numeric=t ;;
 	*)
 		usage ;;
 	esac
@@ -41,7 +43,11 @@ elif [ ! -z "$gui" ]; then
 
 	gitk $range
 elif [ -z "$verbose" ]; then
-	get_full_series
+	if [ -n "$numeric" ]; then
+		get_full_series | cat -n
+	else
+		get_full_series
+	fi
 else
 	prefix="+"
 	top=`get_top`
@@ -60,7 +66,7 @@ else
 				disp "$prefix $patch"
 			fi
 		fi
-	done
+	done | cat `if [ -n "$numeric" ]; then printf "%s" -n; fi`
 fi
 
 }

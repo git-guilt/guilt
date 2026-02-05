@@ -26,6 +26,10 @@ OPTIONS
 	Verbose output; adds an = next to the top most applied patch, and a
 	+ to all other applied patches
 
+-n::
+        Prepend the patch number to each line of output.  Can be
+        combined with -v.
+
 Author
 ------
 Written by Josef "Jeff" Sipek <jeffpc@josefsipek.net>
