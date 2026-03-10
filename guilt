@@ -866,7 +866,8 @@ fold_patch()
 		rm -f "$TMP_CUR" "$TMP_NEXT" "$TMP_DIFF"
 	)
 
-	__refresh_patch "$2" HEAD^^ 2 "" ""
+	GIT_REFLOG_ACTION="$GIT_REFLOG_ACTION: folding $1 into $2" \
+			 __refresh_patch "$2" HEAD^^ 2 "" ""
 
 	series_remove_patch "$1"
 }

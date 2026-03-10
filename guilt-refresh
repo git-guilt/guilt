@@ -41,6 +41,7 @@ if [ -z "$TOP" ]; then
 fi
 
 create_tmpdir
+GIT_REFLOG_ACTION="$GIT_REFLOG_ACTION: $TOP"
 refresh_patch "$TOP" "$gdiff" "$dstat"
 echo "Patch $TOP refreshed"
 
