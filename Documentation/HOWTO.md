@@ -42,59 +42,59 @@ documentation ;) A more detailed description of what is going on is below.
 
 	$ cd some_git_repo
 
-initialize the patch directory
+Initialize the patch directory:
 
 	$ guilt init
 
-create a new patch called 'patch1'
+Create a new patch called 'patch1':
 
 	$ guilt new patch1
 
-edit somefile
+Edit somefile:
 
 	$ vim somefile
 
-refresh patch1 with the changes we just made
+Refresh patch1 with the changes we just made:
 
 	$ guilt refresh
 
 If we look at .git/patches/$branch/patch1, we see a diff with the changes
 we just made.
 
-Create a new patch called 'patch2'
+Create a new patch called 'patch2':
 
 	$ guilt new patch2
 
 
-edit somefile again
+Edit somefile again:
 
 	$ vim somefile
 
-refresh patch2
+Refresh patch2:
 
 	$ guilt refresh
 
-list all applied patches
+List all applied patches:
 
 	$ guilt applied
 
-list all applied and unapplied patches
+List all applied and unapplied patches:
 
 	$ guilt series
 
-pop the top most applied patch
+Pop the top most applied patch:
 
 	$ guilt pop
 
-push the next patch on top of the currently applied patches
+Push the next patch on top of the currently applied patches:
 
 	$ guilt push
 
-pop all patches
+Pop all patches:
 
 	$ guilt pop -a
 
-push all patches
+Push all patches:
 
 	$ guilt push -a
 
@@ -114,7 +114,7 @@ Working with Guilt:
 
 First, get a repository to work on. Here's one that we'll use as an example:
 
-    $ git-clone git://git.kernel.org/pub/scm/linux/kernel/jsipek/guilt-hello.git
+    $ git clone git://git.kernel.org/pub/scm/linux/kernel/jsipek/guilt-hello.git
 
 Now, it is time to initialize the patches directory using guilt's init
 command:
