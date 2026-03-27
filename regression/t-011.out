@@ -41,6 +41,8 @@ Patches directory doesn't exist, try guilt init
 Patches directory doesn't exist, try guilt init
 % guilt refresh
 Patches directory doesn't exist, try guilt init
+% guilt rename
+Patches directory doesn't exist, try guilt init
 % guilt rm
 Patches directory doesn't exist, try guilt init
 % guilt series
