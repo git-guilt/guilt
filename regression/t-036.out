@@ -1,0 +1,44 @@
+% setup_repo
+% guilt rename add add:2
+The specified patch name is invalid according to git-check-ref-format(1).
+% guilt rename addx addx2
+Patch "addx" does not exist
+% guilt rename add add2
+% guilt series
+modify
+add2
+remove
+mode
+% guilt push --all
+Applying patch..modify
+Patch applied.
+Applying patch..add2
+Patch applied.
+Applying patch..remove
+Patch applied.
+Applying patch..mode
+Patch applied.
+% guilt applied
+modify
+add2
+remove
+mode
+% guilt rename remove remove2
+% guilt applied
+modify
+add2
+remove2
+mode
+% guilt top
+mode
+% guilt pop
+Now at remove2.
+% guilt pop
+Now at add2.
+% guilt push
+Applying patch..remove2
+Patch applied.
+% guilt applied
+modify
+add2
+remove2
