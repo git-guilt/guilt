@@ -11,6 +11,9 @@ fi
 
 _main() {
 
+patch=
+edit=
+full=
 case $# in
 	0)
 		patch=`get_top`

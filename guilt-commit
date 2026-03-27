@@ -11,7 +11,7 @@ fi
 
 _main() {
 
-case "$1" in
+case "${1:-}" in
 	-a|--all)
 		[ $# -gt 1 ] && usage
 		pat_commit="1,\$p"

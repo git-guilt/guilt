@@ -11,7 +11,8 @@ fi
 
 _main() {
 
-if [ "$1" = "-k" ]; then
+keep=
+if [ "${1:-}" = "-k" ]; then
 	keep=t
 	shift
 fi
@@ -20,7 +21,7 @@ if [ $# -ne 1 ]; then
 	usage
 fi
 
-patch="$1"
+patch="${1:-}"
 if [ -z "$patch" ]; then
 	die "No patch name supplied."
 fi

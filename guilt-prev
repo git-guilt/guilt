@@ -11,6 +11,7 @@ fi
 
 _main() {
 
+path=
 while [ $# -ne 0 ]; do
 	case "$1" in
 	-p|--path)

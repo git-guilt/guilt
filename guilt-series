@@ -12,6 +12,9 @@ fi
 _main() {
 
 numeric=''
+edit=
+verbose=
+gui=
 while case "$#" in 0) break ;; esac
 do
 	case "$1" in

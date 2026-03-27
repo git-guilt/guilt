@@ -30,7 +30,7 @@ if [ $# -gt 1 ]; then
 	usage
 fi
 
-patchname="$1"
+patchname="${1:-}"
 
 bottompatch=$(head_n 1 < "$applied")
 if [ -z "$bottompatch" ]; then

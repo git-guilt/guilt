@@ -657,7 +657,7 @@ commit()
 		pname="$1"
 		cd_to_toplevel_cached
 
-		if [ "$3" != false ]; then
+		if [ "${3:-}" != false ]; then
 			git diff-files --no-ext-diff --name-only | while read n; do git update-index "$n" ; done
 		fi
 
@@ -757,7 +757,7 @@ push_patch()
 
 		p="$GUILT_DIR/$branch/$1"
 		pname="$1"
-		bail_action="$2"
+		bail_action="${2:-}"
 		reject="--reject"
 		add_files=false
 
@@ -875,6 +875,7 @@ __refresh_patch()
 		# get the patch header
 		do_get_full_header "$p" > "$TMP_DIFF"
 
+		diffopts=
 		[ ! -z "$4" ] && diffopts="-C -M --find-copies-harder"
 		
 		if [ -n "$5" -o $diffstat = "true" ]; then
@@ -947,7 +948,7 @@ munge_hash_range()
 get_tmp_file()
 {
 	while true; do
-		mktemp $2 "/tmp/guilt.$1.XXXXXXXXXXXXXXX" && break
+		mktemp ${2:-} "/tmp/guilt.$1.XXXXXXXXXXXXXXX" && break
 	done
 }
 

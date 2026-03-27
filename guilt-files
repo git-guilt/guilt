@@ -44,6 +44,7 @@ fi | while read patch; do
 	if [ -n "$opt_all" ] && [ -n "$opt_verbose" ] && [ -z "$opt_labels" ]; then
 		disp "$patch"
 	fi
+	use_status=
 	if [ -n "$opt_verbose" ] && [ -z "$opt_labels" ]; then
 		use_status=yes
 	fi

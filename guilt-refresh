@@ -20,6 +20,8 @@ if [ "$COLOR" = "always" ]; then
 	exit 1
 fi
 
+gdiff=
+dstat=
 while [ $# -gt 0 ]; do
 	case "$1" in
 		--git)
