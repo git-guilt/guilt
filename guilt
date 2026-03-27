@@ -247,9 +247,9 @@ verify_branch()
 		die "Patches directory doesn't exist, try guilt init"
 	[ ! -d "$GIT_DIR/patches/$branch" ] &&
 		die "Branch $branch is not initialized, try guilt init"
-	[ ! -f "$GIT_DIR/patches/$branch/series" ] &&
+	[ ! -f "$series" ] &&
 		die "Branch $branch does not have a series file"
-	[ ! -f "$GIT_DIR/patches/$branch/status" ] &&
+	[ ! -f "$applied" ] &&
 		die "Branch $branch does not have a status file"
 	[ -f "$GIT_DIR/patches/$branch/applied" ] &&
 		die "Warning: Branch $branch has 'applied' file - guilt is not compatible with stgit"
@@ -257,13 +257,13 @@ verify_branch()
 
 get_top()
 {
-	tail -n 1 "$GUILT_DIR/$branch/status"
+	tail -n 1 "$applied"
 }
 
 get_prev()
 {
-	if [ `wc -l < "$GUILT_DIR/$branch/status"` -gt 1 ]; then
-		tail -n 2 "$GUILT_DIR/$branch/status" | head_n 1
+	if [ `wc -l < "$applied"` -gt 1 ]; then
+		tail -n 2 "$applied" | head_n 1
 	fi
 }
 
@@ -1030,6 +1030,11 @@ GUILT_DIR="$GIT_DIR/patches"
 raw_git_branch=`get_branch`
 branch=`echo "$raw_git_branch" | sed -e 's,^'$GUILT_PREFIX',,'`
 
+# very useful files
+series="$GUILT_DIR/$branch/series"
+applied="$GUILT_DIR/$branch/status"
+guards_file="$GUILT_DIR/$branch/guards"
+
 git_branch()
 {
 	if $old_style_prefix
@@ -1053,16 +1058,11 @@ if [ -z "$DO_NOT_CHECK_BRANCH_EXISTENCE" ]; then
 	# otherwise nothing can do what's necessary to bring the repo into a
 	# useable state)
 	if [ -z "$DO_NOT_CHECK_STATUS_FILE_FORMAT" ]; then
-		[ -s "$GIT_DIR/patches/$branch/status" ] &&
-			grep "^[0-9a-f]\{40\}:" "$GIT_DIR/patches/$branch/status" > /dev/null &&
+		[ -s "$applied" ] &&
+			grep "^[0-9a-f]\{40\}:" "$applied" > /dev/null &&
 			die "Status file appears to use old format, try guilt repair --status"
 	fi
 fi
-
-# very useful files
-series="$GUILT_DIR/$branch/series"
-applied="$GUILT_DIR/$branch/status"
-guards_file="$GUILT_DIR/$branch/guards"
 
 # determine a pager to use for anything interactive (fall back to more)
 pager="more"
