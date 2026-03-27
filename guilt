@@ -984,6 +984,15 @@ guilt_hook()
 	return $?
 }
 
+resolve_link()
+{
+	if [ -f "$1" ] && [ -L "$1" ]; then
+		printf '%s' "$(realpath "$1")"
+	else
+		printf '%s' "$1"
+	fi
+}
+
 #
 # source the command
 #
@@ -1051,9 +1060,9 @@ raw_git_branch=`get_branch`
 branch=`echo "$raw_git_branch" | sed -e 's,^'$GUILT_PREFIX',,'`
 
 # very useful files
-series="$GUILT_DIR/$branch/series"
-applied="$GUILT_DIR/$branch/status"
-guards_file="$GUILT_DIR/$branch/guards"
+series="$(resolve_link "$GUILT_DIR/$branch/series")"
+applied="$(resolve_link "$GUILT_DIR/$branch/status")"
+guards_file="$(resolve_link "$GUILT_DIR/$branch/guards")"
 
 git_branch()
 {
