@@ -23,7 +23,7 @@ else
 fi
 
 (
-    cd_to_toplevel
+    cd_to_toplevel_cached
 
     [ -f "$GUILT_DIR/$branch/$old_name" ] ||
         die "Patch \"$old_name\" does not exist"
