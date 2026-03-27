@@ -101,7 +101,7 @@ guilt_commands()
 {
 	# GNU Find no longer accepts -perm +111, even though the rest
 	# world (MacOS, Solaris, BSD, etc.) does.  Sigh.  Using -executable
-	# is arugably better, but it is a GNU extension.  Since this isn't
+	# is arguably better, but it is a GNU extension.  Since this isn't
 	# a fast path and guilt doesn't use autoconf, test for it as needed.
 	if find . -maxdepth 0 -executable > /dev/null 2>&1 ; then
 		exe_test="-executable"
