@@ -1,0 +1,118 @@
+# bash completion for guilt command
+
+_guilt() {
+  local cur prev nl
+  cur="$2"
+  prev="$3"
+  nl=$'\n'
+  COMPREPLY=()
+  case "${COMP_WORDS[1]}" in
+  add|rm)
+    # file list
+    COMPREPLY=( $( compgen -o default -G "$cur*" ) )
+    return
+    ;;
+  applied|branch|fork|init|unapplied)
+    # no arguments or options
+    return
+    ;;
+  commit)
+    COMPREPLY=( $( compgen -W "--all -a -n" -- "$cur" ) )
+    return
+    ;;
+  delete)
+    COMPREPLY=( $( IFS=$nl compgen -W "-f$nl$(guilt series)" -- "$cur" ) )
+    return
+    ;;
+  export)
+    # directory
+    COMPREPLY=( $( compgen -o default -G "$cur*" ) )
+    return
+    ;;
+  files)
+    COMPREPLY=( $( compgen -W "-v -a -l" -- "$cur" ) )
+    return
+    ;;
+  fold)
+    COMPREPLY=( $( IFS=$nl compgen -W "-k$nl$(guilt series)" -- "$cur" ) )
+    return
+    ;;
+  graph)
+    COMPREPLY=( $( IFS=$nl compgen -W "-x$nl$(guilt series)" -- "$cur" ) )
+    return
+    ;;
+  guard)
+    COMPREPLY=( $( compgen -W "-l --list -n --none" -- "$cur" ) )
+    return
+    ;;
+  rename)
+    COMPREPLY=( $( IFS=$nl compgen -W "$(guilt series)" -- "$cur" ) )
+    return
+    ;;
+  header)
+    COMPREPLY=( $( IFS=$nl compgen -W "-e$nl-E$nl$(guilt series)" -- "$cur" ) )
+    return
+    ;;
+  help)
+    # default, list of commands
+    ;;
+  # TODO import <-P guilt_patch/patch_file>)
+  import-commit)
+    # <hash/since../since..until/..until>, like git log
+    _xfunc git __git_complete_revlist
+    return
+    ;;
+  guard)
+    COMPREPLY=( $( compgen -W "-f -s -e -m" -- "$cur" ) )
+    return
+    ;;
+  next|prev|top)
+    COMPREPLY=( $( compgen -W "-p --path" -- "$cur" ) )
+    return
+    ;;
+  patchbomb)
+    # TODO finish, can specify git ranges <hash/since../since..until/..until>
+    COMPREPLY=( $( compgen -W "-n -s --in-reply-to --git --subject-prefix" -- "$cur" ) )
+    return
+    ;;
+  pop)
+    COMPREPLY=( $( IFS=$nl compgen -W "--all$nl-a$nl-f$nl-n$nl$(guilt applied)" -- "$cur" ) )
+    return
+    ;;
+  push)
+    COMPREPLY=( $( IFS=$nl compgen -W "--all$nl-a$nl-f$nl-n$nl$(guilt unapplied)" -- "$cur" ) )
+    return
+    ;;
+  goto)
+    COMPREPLY=( $( IFS=$nl compgen -W "-f$nl-r$nl-n$nl$(guilt series)" -- "$cur" ) )
+    return
+    ;;
+  rebase)
+    # <branch/tag/commit>, like git rebase
+    _xfunc git __git_complete_refs
+    return
+    ;;
+  refresh)
+    COMPREPLY=( $( compgen -W "--git --diffstat" -- "$cur" ) )
+    return
+    ;;
+  repair)
+    COMPREPLY=( $( compgen -W "--full --status" -- "$cur" ) )
+    return
+    ;;
+  select)
+    COMPREPLY=( $( compgen -W "-n --none --pop --reapply -s --series" -- "$cur" ) )
+    return
+    ;;
+  series)
+    COMPREPLY=( $( compgen -W "-e -g -v -n" -- "$cur" ) )
+    return
+    ;;
+  status)
+    COMPREPLY=( $( compgen -W "-n -a -A -c -C -d -D -r -R -m -M -t -T -u -U -x -X" -- "$cur" ) )
+    return
+    ;;
+  esac
+  COMPREPLY=( $( compgen -W "add files import prev series applied fold import-commit push status branch fork init rebase top commit graph new refresh unapplied delete guard next repair diff header patchbomb rm export help pop select" -- "$cur" ) )
+}
+complete -F _guilt guilt
