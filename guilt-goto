@@ -107,6 +107,7 @@ if [ `echo "$eidx" | wc -l` -gt 1 ]; then
 	die "Please provide a unique pattern"
 fi
 
+create_tmpdir
 if [ $sidx -lt $eidx ]
 then
 	# Push some patches, starting at the first unapplied patch.
