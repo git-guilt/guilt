@@ -11,8 +11,6 @@ if [ -z "$GUILT_VERSION" ]; then
 	exit 1
 fi
 
-_main() {
-
 case $# in
 	0)
 		page="guilt"
@@ -37,5 +35,3 @@ esac
 MANDIR=`dirname $0`/../man
 MANDIR=`(cd "$MANDIR"; pwd)`
 exec man -M "$MANDIR" "$page"
-
-}

@@ -94,9 +94,10 @@ silent()
 	"$@" >/dev/null 2>/dev/null
 }
 
-toplevel=$(git rev-parse --show-toplevel)
+toplevel=
 cd_to_toplevel_cached()
 {
+	[ -n "$toplevel" ] || toplevel=$(git rev-parse --show-toplevel)
 	cd "$toplevel" >/dev/null 2>&1 || cd_to_toplevel
 }
 
