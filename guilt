@@ -114,7 +114,8 @@ guilt_commands()
 	if find . -maxdepth 0 -executable > /dev/null 2>&1 ; then
 		exe_test="-executable"
 	else
-		exe_test="-perm +111"
+		# A bit more compatible than +111 (for instance works on OpenIndiana)
+		exe_test='( -perm -100 -o -perm -010 -o -perm -001 )'
 	fi
 	find "$GUILT_PATH/../lib/guilt" -maxdepth 1 -name "guilt-*" -type f $exe_test 2> /dev/null | sed -e "s/.*\\/$GUILT-//"
 	find "$GUILT_PATH" -maxdepth 1 -name "guilt-*" -type f $exe_test | sed -e "s/.*\\/$GUILT-//"
