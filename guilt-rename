@@ -39,7 +39,9 @@ fi
 
     series_rename_patch "$old_name" "$new_name"
     applied_rename_patch "$old_name" "$new_name"
-    ref_rename_patch "$old_name" "$new_name"
+    if git show-ref -q --verify "refs/patches/$branch/$old_name"; then
+        ref_rename_patch "$old_name" "$new_name"
+    fi
 )
 
 }
