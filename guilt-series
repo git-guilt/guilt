@@ -11,6 +11,7 @@ fi
 
 _main() {
 
+numeric=''
 while case "$#" in 0) break ;; esac
 do
 	case "$1" in
@@ -21,7 +22,7 @@ do
 	-e)
 		edit=t ;;
 	-n)
-		numeric=t ;;
+		numeric='-n' ;;
 	*)
 		usage ;;
 	esac
@@ -66,7 +67,7 @@ else
 				disp "$prefix $patch"
 			fi
 		fi
-	done | cat `if [ -n "$numeric" ]; then printf "%s" -n; fi`
+	done | cat $numeric
 fi
 
 }
