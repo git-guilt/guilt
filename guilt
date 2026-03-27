@@ -751,6 +751,7 @@ push_patch()
 {
 	__push_patch_bail=0
 
+	create_tmpdir
 	(
 		TMP_LOG="$tmpdir/log"
 
