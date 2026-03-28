@@ -22,11 +22,11 @@ case $# in
 			usage
 		fi
 
-		cat "$applied" | while read pname; do
-			git show-ref refs/patches/$branch/$pname | sed -e "s,refs/patches/$branch/,,"
-		done
+		while read pname; do
+			git show-ref "refs/patches/$branch/$pname"
+		done < "$applied" | sed -e "s,refs/patches/$branch/,,"
 	;;
-	
+
 	*)
 		usage
 		;;

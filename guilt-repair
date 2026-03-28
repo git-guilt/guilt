@@ -33,7 +33,7 @@ repair_status()
 
 	printf "" > "$applied.new"
 
-	cat "$applied" | while read line ; do
+	while read line ; do
 		hash=`echo "$line" | cut -d: -f1`
 		pname=`echo "$line" | cut -d: -f2-`
 
@@ -48,7 +48,7 @@ repair_status()
 
 			mv "$GUILT_DIR/$branch/$pname" "$GUILT_DIR/$branch/$npname"
 		fi
-	done
+	done < "$applied"
 
 	# replace the status file
 	mv "$applied" "$applied~"

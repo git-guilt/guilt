@@ -78,10 +78,10 @@ disp "HEAD is now at `echo $log | cut -c 1-7`... `echo "$log" | cut -c 41-`"
 #		a) push the patch onto the stack
 #
 IFS=":"
-cat "$rebase_dir/status" | while read hash name; do
+while read hash name; do
 	disp ""
 	IFS=" "
-	cat "$GUILT_DIR/$branch/$name" | git patch-id |
+	git patch-id < "$GUILT_DIR/$branch/$name" |
 		while read patchid commitid ; do
 			disp "Applying '$name'"
 			if [ -f "$rebase_dir/$patchid" ]; then
@@ -96,7 +96,7 @@ cat "$rebase_dir/status" | while read hash name; do
 			fi
 		done
 	IFS=":"
-done
+done < "$rebase_dir/status"
 
 rm -rf "$rebase_dir"
 

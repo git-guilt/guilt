@@ -85,7 +85,7 @@ else
 	# we're supposed to pop only up to a patch, make sure the patch is
 	# in the series
 
-	eidx=`cat "$applied" | grep -ne "^$patch$" | cut -d: -f 1`
+	eidx=`grep -ne "^$patch$" < "$applied" | cut -d: -f 1`
 	if [ -z "$eidx" ]; then
 		die "Patch $patch is not in the series/is not applied"
 	fi
