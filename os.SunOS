@@ -61,10 +61,7 @@ _seq()
 # usage: file_size <file>
 file_size()
 {
-	x=$(wc -c < "$1") && {
-		set -- $x
-		echo "$1"
-	}
+	stat -c "%s" "$1"
 }
 
 # for strftime we need GNU Awk
