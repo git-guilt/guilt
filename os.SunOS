@@ -66,3 +66,8 @@ file_size()
 		echo "$1"
 	}
 }
+
+# for strftime we need GNU Awk
+if x="$(command -v gawk 2>/dev/null)" && [ -x "$x" ]; then
+	eval "awk() { \"$x\" \"\$@\";}"
+fi
