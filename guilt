@@ -770,10 +770,7 @@ push_patch()
 {
 	__push_patch_bail=0
 
-	create_tmpdir
 	(
-		TMP_LOG="$tmpdir/log"
-
 		p="$GUILT_DIR/$branch/$1"
 		pname="$1"
 		bail_action="${2:-}"
@@ -788,12 +785,12 @@ push_patch()
 			if [ "$bail_action" = abort ]; then
 				reject=""
 			fi
-			git apply $guilt_push_diff_context --index \
-				$reject "$p" > /dev/null 2> "$TMP_LOG"
+			TMP_LOG="$(git apply $guilt_push_diff_context --index \
+				$reject "$p" 2>&1 >/dev/null)"
 			__push_patch_bail=$?
 
 			if [ $__push_patch_bail -ne 0 ]; then
-				cat "$TMP_LOG" >&2
+				printf '%s\n' "$TMP_LOG" >&2
 				if [ "$bail_action" = "abort" ]; then
 					return $__push_patch_bail
 				fi
