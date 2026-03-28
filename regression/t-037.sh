@@ -43,7 +43,7 @@ done
 # incremental pop by 1
 #
 guilt series -n | _tac | while read n patch ; do
-	cmd guilt goto -n `expr $n - 1`
+	cmd guilt goto -n $(( n - 1 ))
 	cmd list_files
 done
 

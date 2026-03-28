@@ -111,7 +111,7 @@ create_tmpdir
 if [ $sidx -lt $eidx ]
 then
 	# Push some patches, starting at the first unapplied patch.
-	sidx=`expr $sidx + 1`
+	sidx=$(( sidx + 1 ))
 	get_series | sed -n -e "${sidx},${eidx}p" | while read p
 	do
 		disp "Applying patch..$p"
@@ -134,7 +134,7 @@ elif [ $sidx -gt $eidx ]; then
 	# Pop some patches.
 	l=`awk "BEGIN{n=0}(n==$eidx){print \\$0; exit}{n=n+1}END{}" < "$applied"`
 
-	pop_many_patches `git rev-parse refs/patches/$branch/$l^` `expr $sidx - $eidx`
+	pop_many_patches `git rev-parse refs/patches/$branch/$l^` $(( sidx - eidx ))
 
 	p=`get_top`
 	[ ! -z "$p" ] && disp "Now at $p." || disp "All patches popped."

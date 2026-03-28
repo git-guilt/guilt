@@ -23,7 +23,7 @@ fi
 
 if [ $# -eq 0 ]; then
 	n=`wc -l < "$applied"`
-	n=`expr $n + 1`
+	n=$(( n + 1 ))
 
 	if [ $n -gt `get_series | wc -l` ]; then
 		die "No unapplied patch to fold."
