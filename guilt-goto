@@ -132,7 +132,7 @@ then
 	done
 elif [ $sidx -gt $eidx ]; then
 	# Pop some patches.
-	l=`awk "BEGIN{n=0}(n==$eidx){print \\$0; exit}{n=n+1}END{}" < "$applied"`
+	l=`sed -n -e "$(( eidx + 1))p" < "$applied"`
 
 	pop_many_patches `git rev-parse refs/patches/$branch/$l^` $(( sidx - eidx ))
 
