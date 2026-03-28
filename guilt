@@ -850,17 +850,17 @@ fold_patch()
 			0,*)
 				# current is empty; new is not
 				mv "$pcur" "$pcur~"
-				cat "$TMP_NEXT" > "$pcur"
-				cat "$TMP_DIFF" >> "$pcur"
+				cat "$TMP_NEXT" "$TMP_DIFF" > "$pcur"
 				;;
 			*,*)
 				mv "$pcur" "$pcur~"
-				cat "$TMP_CUR" > "$pcur"
-				echo >> "$pcur"
-				echo "Header from folded patch '$1':" >> "$pcur"
-				echo >> "$pcur"
-				cat "$TMP_NEXT" >> "$pcur"
-				cat "$TMP_DIFF" >> "$pcur"
+				{
+					cat "$TMP_CUR"
+					echo
+					echo "Header from folded patch '$1':"
+					echo
+					cat "$TMP_NEXT" "$TMP_DIFF"
+				} > "$pcur"
 				;;
 		esac
 
