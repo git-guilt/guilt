@@ -8,8 +8,8 @@ if [ $# -lt 2 ]; then
 	exit 1
 fi
 
-PRE=$1
+PRE="$1"
 
 shift
 
-(cd $PRE; rm "$@")
+cd "$PRE" && rm "$@"

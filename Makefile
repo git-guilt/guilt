@@ -12,15 +12,18 @@ all:
 
 .PHONY: install
 install:
-	$(INSTALL) -d $(DESTDIR)$(PREFIX)/bin/
-	$(INSTALL) -m 755 guilt $(DESTDIR)$(PREFIX)/bin/
-	$(INSTALL) -d $(DESTDIR)$(PREFIX)/lib/guilt/
-	$(INSTALL) -m 755 $(SCRIPTS) $(DESTDIR)$(PREFIX)/lib/guilt/
-	$(INSTALL) -m 644 $(OSFILES) $(DESTDIR)$(PREFIX)/lib/guilt/
+	$(INSTALL) -d "$(DESTDIR)$(PREFIX)/bin/"
+	$(INSTALL) -m 755 guilt "$(DESTDIR)$(PREFIX)/bin/"
+	$(INSTALL) -d "$(DESTDIR)$(PREFIX)/lib/guilt/"
+	$(INSTALL) -m 755 $(SCRIPTS) "$(DESTDIR)$(PREFIX)/lib/guilt/"
+	$(INSTALL) -m 644 $(OSFILES) "$(DESTDIR)$(PREFIX)/lib/guilt/"
 
 .PHONY: uninstall
 uninstall:
-	./uninstall $(DESTDIR)$(PREFIX)/bin/ $(SCRIPTS)
+	./uninstall "$(DESTDIR)$(PREFIX)/bin/" guilt
+	./uninstall "$(DESTDIR)$(PREFIX)/lib/guilt/" $(SCRIPTS) $(OSFILES)
+	-rmdir -p "$(DESTDIR)$(PREFIX)/lib/guilt/"
+	-rmdir -p "$(DESTDIR)$(PREFIX)/bin/"
 
 .PHONY: doc
 doc:
@@ -28,7 +31,7 @@ doc:
 
 .PHONY: install-doc
 install-doc:
-	$(MAKE) -C Documentation install PREFIX=$(PREFIX) DESTDIR=$(DESTDIR) INSTALL=$(INSTALL)
+	$(MAKE) -C Documentation install PREFIX="$(PREFIX)" DESTDIR="$(DESTDIR)" INSTALL=$(INSTALL)
 
 .PHONY: test
 test:
