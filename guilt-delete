@@ -40,7 +40,7 @@ if [ ! -f "$GUILT_DIR/$branch/$patch" ]; then
 	die "Patch $patch does not exist."
 fi
 
-p=`grep -e "^$patch$" < "$applied"`
+p=`grep -x -e "$patch" < "$applied"`
 if [ ! -z "$p" ] ; then
 	die "Cannot delete an applied patch"
 fi

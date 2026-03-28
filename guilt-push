@@ -90,7 +90,7 @@ else
 	# we're supposed to push only up to a patch, make sure the patch is
 	# in the series
 
-	eidx=`get_series | grep -ne "^$patch\$" | cut -d: -f1`
+	eidx=`get_series | grep -n -x -e "$patch" | cut -d: -f1`
 	if [ -z "$eidx" ]; then
 		die "Patch $patch is not in the series or is guarded."
 	fi

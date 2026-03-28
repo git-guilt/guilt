@@ -43,7 +43,7 @@ base=`git rev-parse "refs/patches/${branch}/${bottompatch}^"`
 if [ -z "$patchname" ]; then
 	top=`git rev-parse HEAD`
 else
-	top=`grep "^$patchname$" "$applied"`
+	top=`grep -x -e "$patchname" "$applied"`
 	if [ -z "$top" ]; then
 		die "Cannot find patch '$patchname'. Is it applied?"
 	fi

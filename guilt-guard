@@ -40,7 +40,7 @@ case $# in
 		;;
 	1)
 		if [ -z $(printf %s "$1" | grep -e '^[+-]') ]; then
-			if [ -z $(get_full_series | grep -e "^$1\$") ]; then
+			if [ -z $(get_full_series | grep -x -e "$1") ]; then
 				die "Patch $1 does not exist."
 			else
 				print_guards "$1"
@@ -56,7 +56,7 @@ case $# in
 		;;
 	*)
 		if [ -z $(printf %s "$1" | grep -e '^[+-]') ]; then
-			if [ -z $(get_full_series | grep -e "^$1\$") ]; then
+			if [ -z $(get_full_series | grep -x -e "$1") ]; then
 				die "Patch $1 does not exist."
 			else
 				patch="$1"

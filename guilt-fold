@@ -50,7 +50,7 @@ if ! must_commit_first; then
 fi
 
 # make sure it is not applied
-pline=`grep -e "^$patch$" < "$applied"`
+pline=`grep -x -e "$patch" < "$applied"`
 if [ ! -z "$pline" ]; then
 	die "Patch is applied. Pop the patch first."
 fi
