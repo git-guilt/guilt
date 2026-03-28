@@ -13,14 +13,7 @@ last_modified()
 # usage: format_last_modified <file>
 format_last_modified()
 {
-	# must strip nano-second part otherwise git gets very
-	# confused, and makes up strange timestamps from the past
-	# (chances are it decides to interpret it as a unix
-	# timestamp).
-	x=$(stat -c "%y" "$1") && {
-		set -- $x
-		echo "$1 ${2%.*} $3"
-	}
+	date -r "$1" '+%Y-%m-%d %H:%M:%S %z'
 }
 
 # usage: head_n [count]
