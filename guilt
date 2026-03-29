@@ -244,10 +244,9 @@ valid_patchname()
 
 get_branch()
 {
-	silent git symbolic-ref HEAD || \
+	x="$(noerr git symbolic-ref HEAD)" || \
 		die "Working on a detached HEAD is unsupported."
-
-	git symbolic-ref HEAD | sed -e 's,^refs/heads/,,'
+	echo "${x#refs/heads/}"
 }
 
 verify_branch()
