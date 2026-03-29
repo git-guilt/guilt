@@ -30,10 +30,10 @@ if [ -e "$GUILT_DIR/$newbranch" ]; then
 	die "Patch directory for branch \"$newbranch\" already exists."
 fi
 
-cat "$applied" | while read n; do
+while read n; do
 	git update-ref "refs/patches/$newbranch/$n" \
 		`git rev-parse "refs/patches/$branch/$n"` ""
-done
+done < "$applied"
 
 if $old_style_prefix || [ -z "`get_top 2>/dev/null`" ]
 then
