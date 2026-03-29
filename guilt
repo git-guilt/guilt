@@ -315,15 +315,14 @@ BEGIN {
 check_guards()
 {
 	get_guards "$1" | while read guard; do
-		g=`echo $guard | sed "s/^[+-]//"`
 		case "$guard" in
 			+*)
 				# Push +guard *only if* guard selected
-				silent grep -F "$g" "$guards_file" || return 1
+				silent grep -F "${guard#+}" "$guards_file" || return 1
 				;;
 			-*)
 				# Push -guard *unless* guard selected
-				silent grep -F "$g" "$guards_file" && return 1
+				silent grep -F "${guard#-}" "$guards_file" && return 1
 				true
 				;;
 		esac
@@ -1051,7 +1050,7 @@ GUILT_DIR="$GIT_DIR/patches"
 # code handles that case as well.  The prefix will be added when you
 # have no patches applied and do a "guilt push".
 raw_git_branch=`get_branch`
-branch=`echo "$raw_git_branch" | sed -e 's,^'$GUILT_PREFIX',,'`
+branch="${raw_git_branch#$GUILT_PREFIX}"
 
 # very useful files
 series="$(resolve_link "$GUILT_DIR/$branch/series")"
