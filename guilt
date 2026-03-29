@@ -271,9 +271,7 @@ get_top()
 
 get_prev()
 {
-	if [ `wc -l < "$applied"` -gt 1 ]; then
-		tail -n 2 "$applied" | head_n 1
-	fi
+	sed -n '${x;p;}; h' < "$applied"
 }
 
 get_full_series()
