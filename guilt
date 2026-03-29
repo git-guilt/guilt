@@ -896,11 +896,11 @@ __refresh_patch()
 		[ ! -z "$4" ] && diffopts="-C -M --find-copies-harder"
 		
 		if [ -n "$5" -o $diffstat = "true" ]; then
-			(
+			{
 				echo "---"
 				git diff --no-ext-diff --stat $diffopts "$2"
 				echo ""
-			) >> "$TMP_DIFF"
+			} >> "$TMP_DIFF"
 		fi
 
 		# get the new patch
