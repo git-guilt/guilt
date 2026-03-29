@@ -4,7 +4,7 @@
 #
 
 GUILT_VERSION="0.37-rc1"
-GUILT_NAME="Irgendwann"
+GUILT_NAME="V lese"
 
 GUILT="$(basename "$0")"
 
