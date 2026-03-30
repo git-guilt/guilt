@@ -3,7 +3,7 @@
 # Copyright (c) Josef "Jeff" Sipek, 2006-2018
 #
 
-GUILT_VERSION="0.37-rc1"
+GUILT_VERSION="0.37"
 GUILT_NAME="V lese"
 
 GUILT="$(basename "$0")"
