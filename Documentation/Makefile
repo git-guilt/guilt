@@ -43,6 +43,10 @@ install-html: html
 	$(INSTALL) -d -m755 $(DESTDIR)$(htmldir)
 	$(INSTALL) -m644 $(DOC_HTML) $(DESTDIR)$(htmldir)
 
+# usage dependencies for sub commands
+$(foreach cmd,$(patsubst %.txt,%,$(MAN1_TXT)),$(eval $(cmd).xml : usage-$(cmd).txt))
+$(foreach cmd,$(patsubst %.txt,%,$(MAN1_TXT)),$(eval $(cmd).html : usage-$(cmd).txt))
+
 #
 # Determine "include::" file references in asciidoc files.
 #
