@@ -1,12 +1,12 @@
-MAN1_TXT= $(wildcard guilt-*.txt)
-MAN7_TXT=guilt.txt
+MAN1_TXT:=$(wildcard guilt-*.txt)
+MAN7_TXT:=guilt.txt
 
-DOC_HTML=$(patsubst %.txt,%.html,$(MAN1_TXT) $(MAN7_TXT))
+DOC_HTML:=$(patsubst %.txt,%.html,$(MAN1_TXT) $(MAN7_TXT))
 
-DOC_MAN1=$(patsubst %.txt,%.1,$(MAN1_TXT))
-DOC_MAN7=$(patsubst %.txt,%.7,$(MAN7_TXT))
+DOC_MAN1:=$(patsubst %.txt,%.1,$(MAN1_TXT))
+DOC_MAN7:=$(patsubst %.txt,%.7,$(MAN7_TXT))
 
-USAGE=$(patsubst %.txt,usage-%.txt,$(MAN1_TXT))
+USAGE:=$(patsubst %.txt,usage-%.txt,$(MAN1_TXT))
 VERSION=$(shell git describe 2> /dev/null || sed -n -e '/^GUILT_VERSION=/ { s/^GUILT_VERSION="/v/; s/"//; p; q; }' ../guilt)
 
 prefix?=$(PREFIX)
