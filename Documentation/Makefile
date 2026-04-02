@@ -75,7 +75,10 @@ usage-guilt-%.txt: ../guilt-% usage.sh
 %.html : %.txt footer.txt version.txt
 	$(ASCIIDOC) -b xhtml11 -d manpage -f asciidoc.conf $(ASCIIDOC_EXTRA) $<
 
-%.1 %.7 : %.xml
+%.1 : %.xml
+	$(XMLTO) -m callouts.xsl $(XMLTO_EXTRA) man $<
+
+%.7 : %.xml
 	$(XMLTO) -m callouts.xsl $(XMLTO_EXTRA) man $<
 
 %.xml : %.txt footer.txt version.txt
