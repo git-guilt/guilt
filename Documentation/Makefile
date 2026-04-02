@@ -54,7 +54,7 @@ doc.dep : $(wildcard *.txt) build-docdep.perl
 -include doc.dep
 
 version.txt:
-	echo "(Generated for Guilt $(VERSION))" > version.txt
+	echo "(Generated for Guilt $(VERSION))" > $@
 
 cmds.txt: cmd-list.sh $(MAN1_TXT)
 	sh ./cmd-list.sh
