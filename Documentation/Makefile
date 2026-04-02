@@ -59,9 +59,7 @@ version.txt:
 cmds.txt: cmd-list.sh $(MAN1_TXT)
 	sh ./cmd-list.sh
 
-guilt.7 guilt.html: guilt.txt footer.txt version.txt
-
-guilt.xml: cmds.txt
+guilt.html guilt.xml: cmds.txt
 
 clean:
 	rm -f *.xml *.html *.1 *.7 doc.dep
