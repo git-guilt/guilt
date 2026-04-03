@@ -113,6 +113,6 @@ _guilt() {
     return
     ;;
   esac
-  COMPREPLY=( $( compgen -W "add files import prev series applied fold import-commit push status branch fork init rebase top commit graph new refresh unapplied delete guard next repair diff header patchbomb rm export help pop select" -- "$cur" ) )
+  COMPREPLY=( $( compgen -W "add applied branch commit delete diff export files fold fork goto graph guard header help import import-commit init new next patchbomb pop prev push rebase refresh rename repair rm select series status top unapplied" -- "$cur" ) )
 }
 complete -F _guilt guilt
