@@ -8,13 +8,12 @@ GUILT_NAME="V lese"
 
 GUILT="$(basename "$0")"
 
-# If the first argument is one of the below, display the man page instead of
-# the rather silly and mostly useless usage string
-case $1 in
+case "$1" in
+	# If the first argument is one of the below, display the man page instead of
+	# the rather silly and mostly useless usage string
 	-h|--h|--he|--hel|--help)
 	shift
-	exec guilt help "$@"
-	exit
+	set -- help "$@"
 	;;
 	-V|--ver|--versi|--versio|--version)
 	echo "Guilt version $GUILT_VERSION"
