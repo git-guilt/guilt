@@ -15,8 +15,8 @@ Perform various repository repairs. You must specify one mode of repair:
 
 --full::
 	Tries to repair everything possible. Additionally, it resets the
-	repository state by reseting the HEAD to what's believed to be the
-	proper commit, and reseting the applied stack. The end result should
+	repository state by resetting the HEAD to what's believed to be the
+	proper commit, and resetting the applied stack. The end result should
 	be a repository with no patches applied.
 
 	WARNING: Running this command may result in commits and working
