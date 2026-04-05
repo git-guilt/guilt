@@ -31,7 +31,7 @@ doc:
 
 .PHONY: install-doc
 install-doc:
-	$(MAKE) -C Documentation install PREFIX="$(PREFIX)" DESTDIR="$(DESTDIR)" INSTALL=$(INSTALL)
+	$(MAKE) -C Documentation install PREFIX="$(PREFIX)" DESTDIR="$(DESTDIR)" INSTALL="$(INSTALL)"
 
 .PHONY: test
 test:
