@@ -18,6 +18,10 @@ OPTIONS
 -a::
 	Push all patches on the tree
 
+-C<num>::
+	Ensure at least <num> lines of surrounding context match before and
+	after each change
+
 -n <num>::
 	Push specified number of patches
 

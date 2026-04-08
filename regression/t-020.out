@@ -432,3 +432,40 @@ f 9c18cc7abe6b87f18503714a80a677b4094eb457  .git/patches/master/add
 f bacb4aad8a55fe4e7aa58a9ae169990bb764069f  .git/patches/master/series
 f bc9ab2e0f5db99d483961e956e814d963f0309f8  .git/patches/master/modify
 f da39a3ee5e6b4b0d3255bfef95601890afd80709  .git/patches/master/status
+% guilt push --all
+Applying patch..modify
+Patch applied.
+Applying patch..add
+Patch applied.
+Applying patch..remove
+Patch applied.
+Applying patch..mode
+Patch applied.
+% guilt new context.patch
+% guilt pop
+Now at mode.
+% guilt push -C2
+Applying patch..context.patch
+warning: def has type 100755, expected 100644
+error: patch failed: def:1
+error: def: patch does not apply
+To force apply this patch, use 'guilt push -f'
+% guilt push -C1
+Applying patch..context.patch
+Patch applied.
+% list_files
+d .git/patches
+d .git/patches/master
+f 0803c721968056410df61400bb239380d033b9d5  .git/patches/master/empty.patch~
+f 1e64e9077f5eedf5833cca1565c4bbddb8521978  .git/patches/master/context.patch
+f 22930c6d1f1938f298a4fca51c57e4b47171db21  .git/patches/master/mode
+f 413390f3906f16f30b054a4fb86c1e014b964504  .git/patches/master/remove
+f 800a8088e6850cb873f1d8ed4f0e09d68de4e7f3  .git/patches/master/status
+f 89012e99772b96ac2b6e8a395943a4347a38a04a  .git/patches/master/series
+f 9c18cc7abe6b87f18503714a80a677b4094eb457  .git/patches/master/add
+f bc9ab2e0f5db99d483961e956e814d963f0309f8  .git/patches/master/modify
+r 33633e7a1aa31972f125878baf7807be57b1672d  .git/refs/patches/master/modify
+r 37d588cc39848368810e88332bd03b083f2ce3ac  .git/refs/patches/master/add
+r ccd56089d1b5305a9d35617cb7f6f4b06ffa68ba  .git/refs/patches/master/mode
+r f6813a436dad6b87e6acd1ecea8525051e7bf45e  .git/refs/patches/master/context.patch
+r ffb7faa126a6d91bcdd44a494f76b96dd860b8b9  .git/refs/patches/master/remove
