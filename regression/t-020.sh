@@ -124,7 +124,25 @@ cmd guilt pop -a
 cmd guilt delete -f empty.patch
 cmd list_files
 
+# test guilt push -C
+cmd guilt push --all
+cmd guilt new context.patch
+cmd guilt pop
+cat > .git/patches/master/context.patch <<EOF
+diff --git a/def b/def
+index 8baef1b..7d69c2f 100644
+--- a/def
++++ b/def
+@@ -1,2 +1,4 @@
+ invalid
+ asjhfksad
++fdkljgf
++iuvcxlkjh
+EOF
+touch -a -m -t "$TOUCH_DATE" .git/patches/master/context.patch
+shouldfail guilt push -C2
+cmd guilt push -C1
+cmd list_files
+
 # FIXME:
-#   --all
-#   -a
 #   -n with some patches already applied

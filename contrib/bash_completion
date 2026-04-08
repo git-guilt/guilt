@@ -80,7 +80,7 @@ _guilt() {
     return
     ;;
   push)
-    COMPREPLY=( $( IFS=$nl compgen -W "--all$nl-a$nl-f$nl-n$nl$(guilt unapplied)" -- "$cur" ) )
+    COMPREPLY=( $( IFS=$nl compgen -W "--all$nl-a$nl-f$nl-n$nl-C$nl$(guilt unapplied)" -- "$cur" ) )
     return
     ;;
   goto)
