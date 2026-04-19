@@ -55,7 +55,7 @@ _seq()
 			/usr/bin/jot $1
 		elif [ $# -eq 2 ]
 		then
-			n1=$((${2} - ${1} + 1))
+			n1=$(( ${2} - ${1} + 1 ))
 			n2=$1
 			/usr/bin/jot $n1 $n2
 		elif [ $# -eq 3 ]
