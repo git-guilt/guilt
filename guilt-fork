@@ -33,7 +33,7 @@ else
 		| sed -r -e 's:(\.diff?|\.patch)$::')
 	num=$(echo "$base" | sed -nre 's:.*-([0-9]+)$:\1:'p)
 	[ -n "$num" ] || num=1
-	newpatch="${base%-$num}-$(($num+1))${patch#$base}"
+	newpatch="${base%-$num}-$(( $num + 1 ))${patch#$base}"
 fi
 
 if ! valid_patchname "$newpatch"; then
