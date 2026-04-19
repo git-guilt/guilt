@@ -668,7 +668,7 @@ commit()
 		pname="$1"
 		cd_to_toplevel_cached
 
-		if [ "${3:-}" != false ]; then
+		if $3; then
 			git diff-files --no-ext-diff --name-only | while read n; do git update-index "$n" ; done
 		fi
 
@@ -903,7 +903,7 @@ __refresh_patch()
 		mv "$TMP_DIFF" "$p"
 
 		# commit
-		commit "$pname" "HEAD~$3"
+		commit "$pname" "HEAD~$3" true
 
 		# drop folded patches
 		N=$(( $3 - 1 ))
