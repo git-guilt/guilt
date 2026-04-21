@@ -32,7 +32,7 @@ case $# in
 		;;
 esac
 
-MANDIR=`dirname $0`/../man
+MANDIR=${GUILT_REG_MANDIR:-`dirname $0`/../man}
 if [ -d "$MANDIR" ]; then
     MANDIR=`(cd "$MANDIR"; pwd)`
     exec man -M "$MANDIR" "$page"

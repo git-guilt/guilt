@@ -7,6 +7,9 @@ set -e
 
 export PATH=$PWD/..:$PATH
 
+# "guilt help" should use man-pages from the source directory.
+export GUILT_REG_MANDIR=$REG_DIR/man
+
 export TZ="UTC"
 export TOUCH_DATE="200701010000.00"
 export GIT_AUTHOR_DATE="2007-01-01 00:00:00 UTC"
