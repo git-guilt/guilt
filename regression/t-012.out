@@ -1,0 +1,28 @@
+% setup_repo
+% guilt push
+Applying patch..modify
+Patch applied.
+% guilt branch
+fatal: guilt cannot be used without a working tree.
+% guilt diff
+fatal: this operation must be run in a work tree
+% guilt files
+fatal: guilt cannot be used without a working tree.
+% guilt fold
+fatal: guilt cannot be used without a working tree.
+% guilt fork
+fatal: guilt cannot be used without a working tree.
+% guilt init
+fatal: guilt cannot be used without a working tree.
+% guilt pop
+fatal: guilt cannot be used without a working tree.
+% guilt push
+fatal: guilt cannot be used without a working tree.
+% guilt rebase
+fatal: guilt cannot be used without a working tree.
+% guilt refresh
+fatal: guilt cannot be used without a working tree.
+% guilt select
+fatal: guilt cannot be used without a working tree.
+% guilt status
+fatal: guilt cannot be used without a working tree.
