@@ -1,0 +1,21 @@
+#!/bin/sh
+
+path="$PATH:"
+
+if [ -z "$GUILT_REG_MANDIR" ]; then
+	echo "GUILT_REG_MANDIR not set!" >&2
+	exit 1
+fi
+
+while [ -n "$path" ]; do
+	curr="${path%%:*}"
+	path="${path#*:}"
+	if [ -x "$curr/man" ] && [ ! -x "$curr/../../regression/bin/man" ]; then
+		export MANDIR="$GUILT_REG_MANDIR"
+		exec "$curr/man" -M "$MANDIR" "$@"
+		break
+	fi
+done
+
+echo "Old man executable not found!" >&2
+exit 1

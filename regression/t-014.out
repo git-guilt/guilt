@@ -125,6 +125,8 @@ f 9c18cc7abe6b87f18503714a80a677b4094eb457  .git/patches/master/patches/add
 f bc9ab2e0f5db99d483961e956e814d963f0309f8  .git/patches/master/modify
 f e9a7092d1a00f47e1df206eb4bf1f1cd9ef6d50d  .git/patches/master/series
 r 37d588cc39848368810e88332bd03b083f2ce3ac  .git/refs/patches/master/add
+% guilt help
+% sh -c guilt help | grep -q "Test manual text"
 % guilt next
 remove
 % guilt push

@@ -33,6 +33,10 @@ cmd list_files
 cmd list_files
 (cd $dir && cmd guilt header)
 cmd list_files
+# Redirect stdout to /dev/null; different man output format
+# the page differently.
+(cd $dir && cmd_silent guilt help)
+(cd $dir && cmd sh -c 'guilt help | grep -q "Test manual text"')
 (cd $dir && cmd guilt next)
 
 # We only get interesting output from "guilt prev" when there are at
