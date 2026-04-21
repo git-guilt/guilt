@@ -22,6 +22,8 @@ else
 	usage
 fi
 
+need_work_tree
+
 (
     cd_to_toplevel_cached
 

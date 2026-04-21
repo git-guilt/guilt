@@ -100,6 +100,15 @@ cd_to_toplevel_cached()
 	cd "$toplevel" >/dev/null 2>&1 || cd_to_toplevel
 }
 
+need_work_tree()
+{
+	# cache toplevel, if not found give error
+	[ -n "$toplevel" ] || toplevel=$(git rev-parse --show-toplevel 2>/dev/null)
+	if [ $? -ne 0 ] || [ -z "$toplevel" ]; then
+		require_work_tree
+	fi
+}
+
 ########
 
 GUILT_PATH="$(dirname "$0")"
