@@ -40,6 +40,8 @@ fi
 
 patch="$1"
 
+require_work_tree
+
 # Make sure that there are no unapplied changes.
 if ! must_commit_first; then
 	die "Uncommited changes detected. Refresh first."

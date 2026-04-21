@@ -52,6 +52,8 @@ fi
 patch="${1:-}"
 [ ! -z "$all" ] && patch="-a"
 
+require_work_tree
+
 # Treat "guilt pop" as "guilt pop -n 1".
 if [ -z "$patch" ]; then
 	patch=1

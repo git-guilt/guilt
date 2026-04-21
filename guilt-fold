@@ -21,6 +21,8 @@ if [ $# -gt 1 ]; then
 	usage
 fi
 
+require_work_tree
+
 if [ $# -eq 0 ]; then
 	n=`wc -l < "$applied"`
 	n=$(( n + 1 ))

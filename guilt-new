@@ -52,6 +52,8 @@ while [ $# -gt 0 ] ; do
 	shift
 done
 
+require_work_tree
+
 if [ -z "$patch" ]; then
 	die "You must specify a patch name"
 fi

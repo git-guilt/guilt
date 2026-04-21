@@ -21,6 +21,11 @@ select_guards()
 
 _main() {
 
+# Since this command sometimes invoke push and/or pop, it won't work
+# without a work tree, at least in those cases.  Require it always,
+# for consistency.
+require_work_tree
+
 if [ $# -eq 0 ]; then
 	if [ -s "$guards_file" ]; then
 		cat "$guards_file"

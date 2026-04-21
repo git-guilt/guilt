@@ -55,6 +55,8 @@ if [ ! -z "$all" ] && [ $# -gt 0 ]; then
 	usage
 fi
 
+require_work_tree
+
 patch="${1:-}"
 [ ! -z "$all" ] && patch="-a"
 

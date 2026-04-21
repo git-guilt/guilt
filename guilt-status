@@ -78,6 +78,8 @@ while [ $# -gt 0 ]; do
 	shift
 done
 
+require_work_tree
+
 # default status displays all
 if [ -z "$DIFF_FILTER" ]; then
 	untracked="t"
