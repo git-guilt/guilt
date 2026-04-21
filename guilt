@@ -1086,9 +1086,6 @@ if [ -z "$DO_NOT_CHECK_BRANCH_EXISTENCE" ]; then
 	fi
 fi
 
-# cache toplevel
-[ -n "$toplevel" ] || toplevel=$(git rev-parse --show-toplevel)
-
 # determine a pager to use for anything interactive (fall back to more)
 pager="more"
 [ ! -z "$PAGER" ] && pager="$PAGER"
