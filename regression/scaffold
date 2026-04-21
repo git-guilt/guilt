@@ -64,6 +64,21 @@ function cmd
 	fi
 }
 
+# usage: cmd_silent <cmd>..
+# Like cmd, but discard the output from the command.
+function cmd_silent
+{
+	printf "%% %s\n" "$*" | replace_path
+	if ! (
+		exec 3>&1
+		rv=`(("$@" 2>&1 >/dev/null; echo $? >&4) | replace_path >&3 ) 4>&1`
+		exit $rv
+	) ; then
+		echo "% FAIL: The above command should succeed but failed."
+		exit 1
+	fi
+}
+
 # usage: shouldfail <cmd>..
 function shouldfail
 {
