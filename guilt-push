@@ -41,19 +41,19 @@ if [ $# -gt 1 ]; then
 	usage
 fi
 
-# "guilt-push" or "guilt-push foo"
+# "guilt push" or "guilt push foo"
 if [ -z "$all" ] && [ $# -gt 1 ]; then
 	usage
 fi
 
-# "guilt-push -n foo"
+# "guilt push -n foo"
 if [ ! -z "$num" ]; then
 	if [ $# -gt 1 ] || [ $# -eq 0 ]; then
 		usage
 	fi
 fi
 
-# "guilt-push -a"
+# "guilt push -a"
 if [ ! -z "$all" ] && [ $# -gt 0 ]; then
 	usage
 fi

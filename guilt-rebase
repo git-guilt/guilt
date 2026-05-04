@@ -91,7 +91,7 @@ while read hash name; do
 				disp "Patch removed from series."
 			else
 				# FIXME: use a guilt function instead
-				guilt-push > /dev/null
+				guilt push > /dev/null
 				disp "Patch applied."
 			fi
 		done

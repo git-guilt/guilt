@@ -32,7 +32,7 @@ while [ $# -gt 0 ]; do
 	shift
 done
 
-# "guilt-pop" or "guilt-pop foo" or "guilt-pop -n foo"
+# "guilt pop" or "guilt pop foo" or "guilt pop -n foo"
 if [ -z "$all" ] && [ $# -gt 1 ]; then
 	usage
 fi
