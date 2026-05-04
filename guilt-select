@@ -35,16 +35,16 @@ case $1 in
 		rm -f "$guards_file"
 		;;
 	--pop)
-		guilt-pop -a
+		guilt pop -a
 		shift
 		select_guards "$@"
 		;;
 	--reapply)
 		top=`get_top`
-		guilt-pop -a
+		guilt pop -a
 		shift
 		select_guards "$@"
-		guilt-push "$top"
+		guilt push "$top"
 		;;
 	-s|--series)
 		(get_full_series | while read patch; do
