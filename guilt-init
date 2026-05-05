@@ -25,6 +25,8 @@ while case $# in 0) break ;; esac; do
 	shift
 done
 
+require_work_tree
+
 if [ -d "$GUILT_DIR/$branch" ]; then
 	die "Branch $branch appears to be already initialized (GIT_DIR=$GIT_DIR)"
 fi

@@ -30,6 +30,8 @@ do
 	shift
 done
 
+require_work_tree
+
 top_patch=`get_top`
 
 IFS=:

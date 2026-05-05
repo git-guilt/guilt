@@ -34,6 +34,8 @@ while [ $# -gt 0 ]; do
 	shift
 done
 
+require_work_tree
+
 TOP=`get_top`
 
 if [ -z "$TOP" ]; then

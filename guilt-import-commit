@@ -26,6 +26,8 @@ if [ $# -ne 1 ] || [ -z "$1" ]; then
 	die "You must specify a range of commits"
 fi
 
+require_work_tree
+
 rhash=`munge_hash_range $1`
 
 # make sure that there are no unapplied changes

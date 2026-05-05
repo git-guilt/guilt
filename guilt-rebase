@@ -13,6 +13,8 @@ fi
 
 _main() {
 
+require_work_tree
+
 disp "Beware, rebase is currently EXPERIMENTAL."
 disp "In other words, it might eat your patches."
 _disp "Do you wish to proceed? [y/N] "
