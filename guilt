@@ -903,7 +903,7 @@ __refresh_patch()
 		mv "$TMP_DIFF" "$p"
 
 		# commit
-		commit "$pname" "HEAD~$3"
+		commit "$pname" "HEAD~$3" true
 
 		# drop folded patches
 		N=$(( $3 - 1 ))
