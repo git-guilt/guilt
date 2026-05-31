@@ -658,12 +658,7 @@ pop_all_patches()
 # usage: remove_ref <refname>
 remove_ref()
 {
-	# does the ref exist?
-	r=`git show-ref --verify -s "$1" 2> /dev/null`
-	[ $? -ne 0 ] && exit 0
-
-	# remove it
-	git update-ref -d "$1" "$r"
+	git update-ref -d "$1"
 }
 
 # usage: commit patchname parent add_files
