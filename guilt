@@ -607,9 +607,18 @@ applied_rename_patch()
 # reads patch names from stdin
 remove_patch_refs()
 {
-	while read pname; do
-		remove_ref "refs/patches/$branch/$pname"
-	done
+	if git update-ref --stdin -z < /dev/null 2>/dev/null; then
+		# here we use awk as "branch" can contain characters
+		# hard to quote, also to handle NUL characters
+		awk -v branch="$branch" \
+			'BEGIN { ORS="" } { printf "delete refs/patches/%s/%s%c%c", branch, $0, 0, 0 }' | \
+			git update-ref --stdin -z
+	else
+		# old, slow
+		while read pname; do
+			remove_ref "refs/patches/$branch/$pname"
+		done
+	fi
 }
 
 # usage: pop_many_patches <commitish> <number of patches>
