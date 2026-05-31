@@ -40,7 +40,7 @@ sed -n -e "${pat_commit}" "$applied" | while read pname; do
 				"refs/patches/$branch/$pname"
 
 	series_remove_patch "$pname"
-	echo "$pname" | remove_patch_refs
+	remove_ref "refs/patches/$branch/$pname"
 done
 
 # update $applied to include only the patches we're keeping
