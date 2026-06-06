@@ -3,7 +3,7 @@
 # Copyright (c) Josef "Jeff" Sipek, 2006-2013
 #
 
-USAGE="[-v | -g | -e | -n]"
+USAGE="[-v | -g | -e | -n | -m]"
 if [ -z "$GUILT_VERSION" ]; then
 	echo "Invoking `basename "$0"` directly is no longer supported." >&2
 	exit 1
@@ -15,6 +15,7 @@ numeric=''
 edit=
 verbose=
 gui=
+missing=
 while case "$#" in 0) break ;; esac
 do
 	case "$1" in
@@ -26,6 +27,8 @@ do
 		edit=t ;;
 	-n)
 		numeric='-n' ;;
+	-m)
+		missing=t ;;
 	*)
 		usage ;;
 	esac
@@ -46,6 +49,15 @@ elif [ ! -z "$gui" ]; then
 	[ "$bottom" = "$top" ] && range="$bottom^..$bottom"
 
 	gitk $range
+elif [ ! -z "$missing" ]; then
+	create_tmpdir
+	ls -A "$GUILT_DIR/$branch" | grep -v -e '~$' -e '^guards$' -e '^series$' \
+		-e '^status$' | sed 's,^,  ,' > "$tmpdir/curr"
+	get_full_series | sort | sed 's,^,  ,' > "$tmpdir/exp"
+	echo "Patches present in dir but missing from series:"
+	comm -23 "$tmpdir/curr" "$tmpdir/exp"
+	echo "Patches present in series but missing from dir:"
+	comm -13 "$tmpdir/curr" "$tmpdir/exp"
 elif [ -z "$verbose" ]; then
 	if [ -n "$numeric" ]; then
 		get_full_series | cat -n
