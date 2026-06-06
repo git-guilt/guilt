@@ -21,7 +21,7 @@ _guilt() {
     return
     ;;
   delete)
-    COMPREPLY=( $( IFS=$nl compgen -W "-f$nl$(guilt series)" -- "$cur" ) )
+    COMPREPLY=( $( IFS=$nl compgen -W "-f$nl$(guilt unapplied)" -- "$cur" ) )
     return
     ;;
   export)
