@@ -11,7 +11,7 @@ include::usage-guilt-delete.txt[]
 
 DESCRIPTION
 -----------
-Delete an unapplied patch from the series.
+Delete unapplied patches from the series.
 
 OPTIONS
 -------
