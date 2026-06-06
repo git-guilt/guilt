@@ -24,3 +24,8 @@ cmd guilt new delete-me
 cmd guilt pop
 cmd guilt delete -f delete-me
 cmd list_files
+
+# try multiple patches
+cmd guilt delete -f remove modify
+cmd list_files
+cmd guilt series
