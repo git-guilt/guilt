@@ -1,0 +1,11 @@
+% setup_repo
+% guilt series
+modify
+add
+remove
+mode
+% guilt series -m
+Patches present in dir but missing from series:
+  additional
+Patches present in series but missing from dir:
+  non-existent

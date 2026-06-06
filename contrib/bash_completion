@@ -84,7 +84,7 @@ _guilt() {
     return
     ;;
   goto)
-    COMPREPLY=( $( IFS=$nl compgen -W "-f$nl-r$nl-n$nl$(guilt series)" -- "$cur" ) )
+    COMPREPLY=( $( IFS=$nl compgen -W "-f$nl-r$nl-n$nl-m$nl$(guilt series)" -- "$cur" ) )
     return
     ;;
   rebase)
