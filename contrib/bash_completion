@@ -105,7 +105,7 @@ _guilt() {
     return
     ;;
   series)
-    COMPREPLY=( $( compgen -W "-e -g -v -n" -- "$cur" ) )
+    COMPREPLY=( $( compgen -W "-e -g -v -n -m" -- "$cur" ) )
     return
     ;;
   status)
