@@ -3,7 +3,7 @@ guilt-delete(1)
 
 NAME
 ----
-guilt-delete - Delete a patch
+guilt-delete - Delete patches
 
 SYNOPSIS
 --------
