@@ -16,6 +16,7 @@ fi
 _main() {
 
 need_work_tree
+need_head
 
 # make sure that there are no unapplied changes
 if ! must_commit_first; then

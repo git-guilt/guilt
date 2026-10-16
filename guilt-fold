@@ -22,6 +22,7 @@ if [ $# -gt 1 ]; then
 fi
 
 need_work_tree
+need_head
 
 if [ $# -eq 0 ]; then
 	n=`wc -l < "$applied"`

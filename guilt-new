@@ -53,6 +53,7 @@ while [ $# -gt 0 ] ; do
 done
 
 need_work_tree
+need_head
 
 if [ -z "$patch" ]; then
 	die "You must specify a patch name"
