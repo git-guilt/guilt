@@ -109,6 +109,13 @@ need_work_tree()
 	fi
 }
 
+need_head()
+{
+	if ! git rev-parse -q --verify 'HEAD^{commit}' >/dev/null; then
+		die "HEAD does not refer to a commit"
+	fi
+}
+
 ########
 
 GUILT_PATH="$(dirname "$0")"

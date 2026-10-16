@@ -26,6 +26,10 @@ _main() {
 # for consistency.
 need_work_tree
 
+# Likewise, this command sometimes requires a commit.  Check it here,
+# so that a missing commit does not cause multiple errors.
+need_head
+
 if [ $# -eq 0 ]; then
 	if [ -s "$guards_file" ]; then
 		cat "$guards_file"

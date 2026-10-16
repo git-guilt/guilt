@@ -1,0 +1,78 @@
+% guilt init
+% list_files
+d .git/patches
+d .git/patches/master
+f da39a3ee5e6b4b0d3255bfef95601890afd80709  .git/patches/master/series
+f da39a3ee5e6b4b0d3255bfef95601890afd80709  .git/patches/master/status
+% guilt import add.patch
+% list_files
+d .git/patches
+d .git/patches/master
+f 680417dce55e3d873d7e4ff5aa8f7c56f2d7da93  .git/patches/master/series
+f 9c18cc7abe6b87f18503714a80a677b4094eb457  .git/patches/master/add.patch
+f da39a3ee5e6b4b0d3255bfef95601890afd80709  .git/patches/master/status
+% guilt new abc
+HEAD does not refer to a commit
+% guilt applied
+% guilt unapplied
+add.patch
+% guilt push
+HEAD does not refer to a commit
+% guilt pop
+No patches applied.
+% guilt branch foo
+HEAD does not refer to a commit
+% guilt diff
+% guilt diff -z
+% guilt export expdir
+Series exported to "expdir" successfully.
+% rm expdir/series expdir/add.patch
+% rmdir expdir
+% guilt files
+% guilt fold
+HEAD does not refer to a commit
+% guilt fork
+No patches are applied.
+% guilt goto add.patch
+HEAD does not refer to a commit
+% guilt graph
+No patch applied.
+% guilt guard
+No patches applied.
+% guilt header
+No patches applied.
+% guilt import-commit HEAD
+HEAD does not refer to a commit
+% guilt next
+add.patch
+% guilt prev
+% guilt rebase
+HEAD does not refer to a commit
+% guilt refresh
+No patches applied; try guilt push first
+% guilt rename add.patch addfile.patch
+% guilt repair --full
+HEAD does not refer to a commit
+% touch testfile.txt
+% guilt add testfile.txt
+% guilt rm testfile.txt
+error: the following file has changes staged in the index:
+    testfile.txt
+(use --cached to keep the file, or -f to force removal)
+% guilt select --reapply foo
+HEAD does not refer to a commit
+% guilt series
+addfile.patch
+% guilt status
+A testfile.txt
+% guilt top
+% guilt unapplied
+addfile.patch
+% guilt commit -a
+% guilt delete addfile.patch
+% list_files
+d .git/patches
+d .git/patches/master
+f 9c18cc7abe6b87f18503714a80a677b4094eb457  .git/patches/master/addfile.patch
+f da39a3ee5e6b4b0d3255bfef95601890afd80709  .git/patches/master/series
+f da39a3ee5e6b4b0d3255bfef95601890afd80709  .git/patches/master/status
