@@ -1,4 +1,9 @@
 # bash completion for guilt command
+#
+# This file could be copied in ~/.local/share/bash-completion/completions/
+# as guilt for user usage or in /usr/share/bash-completion/completions/
+# (same guilt name) for system usage (note that your system could use
+# slightly different directory based on system configurations).
 
 _guilt() {
   local cur prev nl
@@ -115,4 +120,8 @@ _guilt() {
   esac
   COMPREPLY=( $( compgen -W "add applied branch commit delete diff export files fold fork goto graph guard header help import import-commit init new next patchbomb pop prev push rebase refresh rename repair rm select series status top unapplied" -- "$cur" ) )
 }
-complete -F _guilt guilt
+if bash -li -c '_xfunc git' 2>/dev/null; then
+  complete -F _guilt guilt
+else
+  echo 'Bash completion function for guilt requires bash-completion package or files installed' >&2
+fi
