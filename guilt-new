@@ -52,7 +52,6 @@ while [ $# -gt 0 ] ; do
 	shift
 done
 
-need_work_tree
 need_head
 
 if [ -z "$patch" ]; then

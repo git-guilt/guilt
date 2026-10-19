@@ -111,6 +111,7 @@ need_work_tree()
 
 need_head()
 {
+	need_work_tree
 	if ! git rev-parse -q --verify 'HEAD^{commit}' >/dev/null; then
 		die "HEAD does not refer to a commit"
 	fi

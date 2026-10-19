@@ -21,7 +21,6 @@ if [ $# -gt 1 ]; then
 	usage
 fi
 
-need_work_tree
 need_head
 
 if [ $# -eq 0 ]; then

@@ -58,7 +58,6 @@ if [ ! -z "$all" ] && [ $# -gt 0 ]; then
 	usage
 fi
 
-need_work_tree
 need_head
 
 patch="${1:-}"

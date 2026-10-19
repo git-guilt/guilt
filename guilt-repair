@@ -117,7 +117,6 @@ case "$1" in
 		;;
 esac
 
-need_work_tree
 need_head
 
 oldrev=`git show-ref -s "refs/heads/\`git_branch\`"`

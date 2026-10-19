@@ -31,7 +31,6 @@ if [ $# -ne 1 ] || [ -z "$1" ]; then
 	die "You must specify a range of commits"
 fi
 
-need_work_tree
 need_head
 
 rhash=`munge_hash_range $1`

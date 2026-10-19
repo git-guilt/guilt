@@ -22,12 +22,8 @@ select_guards()
 _main() {
 
 # Since this command sometimes invoke push and/or pop, it won't work
-# without a work tree, at least in those cases.  Require it always,
-# for consistency.
-need_work_tree
-
-# Likewise, this command sometimes requires a commit.  Check it here,
-# so that a missing commit does not cause multiple errors.
+# without a work tree and a commit, at least in those cases.  Require
+# it always, for consistency.
 need_head
 
 if [ $# -eq 0 ]; then
