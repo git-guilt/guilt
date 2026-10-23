@@ -108,7 +108,8 @@ function replace_path
 	    -e "s,\.\.\. initial, initial,g" \
 	    -e "s,^Already on\( branch\)\? [\"']\([^\"']*\)[\"']$,Already on \"\2\",g" \
 	    -e "s,^Switched to branch [\"']\([^\"']*\)[\"'],Switched to branch \"\1\",g" \
-	    -e "s,This operation must be run in a work tree,this operation must be run in a work tree,"
+	    -e "s,This operation must be run in a work tree,this operation must be run in a work tree," \
+	    -e "s,: 'testfile.txt' has changes staged in the index,: the following file has changes staged in the index:\n    testfile.txt,"
 }
 
 # Newer dd does
