@@ -16,7 +16,7 @@ select_guards()
 			die "'$x' cannot begin with + or -."
 		fi
 	done
-	echo "$@" | sed -e 's/ /\n/g' | sort | uniq > "$guards_file"
+	printf '%s\n' "$@" | sort | uniq > "$guards_file"
 }
 
 _main() {
@@ -54,7 +54,7 @@ case $1 in
 	-s|--series)
 		(get_full_series | while read patch; do
 			get_guards "$patch"
-		done) | sed -e 's/ /\n/g' | sort | uniq
+		done) | tr ' ' '\n' | sort | uniq
 		;;
 	*)
 		select_guards "$@"
