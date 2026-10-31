@@ -900,7 +900,7 @@ __refresh_patch()
 		diffopts=
 		[ ! -z "$4" ] && diffopts="-C -M --find-copies-harder"
 		
-		if [ -n "$5" -o $diffstat = "true" ]; then
+		if [ -n "$5" ] || [ "$diffstat" = "true" ]; then
 			{
 				echo "---"
 				git diff --no-ext-diff --stat $diffopts "$2"

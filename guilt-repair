@@ -38,7 +38,7 @@ repair_status()
 		pname=`disp "$line" | cut -d: -f2-`
 
 		npname=`disp "$pname" | sed -e 's/ /-/g'`
-		[ "$pname" != "$npname" -a -e "$npname" ] && die "Patch name collision"
+		[ "$pname" != "$npname" ] && [ -e "$npname" ] && die "Patch name collision"
 
 		git update-ref "refs/patches/$branch/$npname" "$hash"
 		disp "$npname" >> "$applied.new"
