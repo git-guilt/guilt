@@ -24,3 +24,14 @@ cmd grep ' add ' .git/patches/master/series
 cmd guilt fork foobar
 
 cmd list_files
+
+# Without an argument, fork derives the new name from the old one.
+cmd guilt fork
+cmd guilt top
+cmd guilt new p-08.patch
+cmd guilt fork
+cmd guilt top
+cmd guilt new q-9
+cmd guilt fork
+cmd guilt top
+cmd guilt series

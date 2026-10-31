@@ -35,7 +35,11 @@ else
 		| sed -E -e 's:(\.diff?|\.patch)$::')
 	num=$(echo "$base" | sed -n -E -e 's:.*-([0-9]+)$:\1:'p)
 	[ -n "$num" ] || num=1
-	newpatch="${base%-$num}-$(( $num + 1 ))${patch#$base}"
+	# expr, unlike $(( )), does not treat a leading 0 as octal.
+	# Keep the original width, so that "foo-08" becomes "foo-09".
+	newnum=`expr "$num" + 1`
+	newnum=`printf "%0${#num}d" "$newnum"`
+	newpatch="${base%-$num}-$newnum${patch#$base}"
 fi
 
 if ! valid_patchname "$newpatch"; then
