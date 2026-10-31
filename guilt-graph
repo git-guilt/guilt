@@ -77,7 +77,7 @@ while [ "$current" != "$base" ]; do
 	rm -f "$cache/dep"
 	touch "$cache/dep"
 
-	getfiles $current | grep -v -f "$xclude" | while read f; do
+	getfiles $current | grep -v -f "$xclude" | while read -r f; do
 		# hash the filename
 		fh=`disp "$f" | sha1 | cut -d' ' -f1`
 		if [ -e "$cache/$fh" ]; then
@@ -87,7 +87,7 @@ while [ "$current" != "$base" ]; do
 		echo "$current" > "$cache/$fh"
 	done
 
-	sort -u "$cache/dep" | while read h; do
+	sort -u "$cache/dep" | while read -r h; do
 		disp "	\"$h\" -> \"$current\"; // ?"
 	done
 

@@ -114,7 +114,7 @@ if [ $sidx -lt $eidx ]
 then
 	# Push some patches, starting at the first unapplied patch.
 	sidx=$(( sidx + 1 ))
-	get_series | sed -n -e "${sidx},${eidx}p" | while read p
+	get_series | sed -n -e "${sidx},${eidx}p" | while read -r p
 	do
 		disp "Applying patch..$p"
 		if [ ! -f "$GUILT_DIR/$branch/$p" ]; then

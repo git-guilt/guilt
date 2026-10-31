@@ -69,7 +69,7 @@ else
 	top=`get_top`
 
 	get_full_series |
-	while read patch; do
+	while read -r patch; do
 		if [ -z "$top" ]; then
 			disp "  $patch"
 		else

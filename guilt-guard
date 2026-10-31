@@ -18,7 +18,7 @@ print_guards()
 _main() {
 
 if [ "$1" = "-l" ] || [ "$1" = "--list" ]; then
-	get_full_series | while read patch; do
+	get_full_series | while read -r patch; do
 		print_guards "$patch"
 	done
 	exit 0

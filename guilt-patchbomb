@@ -50,7 +50,7 @@ fi
 git log --no-decorate --pretty=oneline "$r" | cut -c 1-8,41- | $pager
 
 _disp "Are these what you want to send? [Y/n] "
-read n
+read -r n
 if [ "$n" = "n" ] || [ "$n" = "N" ]; then
 	die "Aborting..."
 fi
@@ -75,9 +75,9 @@ fi
 
 # get the to/cc addresses
 _disp "Enter all the To: email addresses (separated by space): "
-read rawto
+read -r rawto
 _disp "Enter all the Cc: email addresses (separated by space): "
-read rawcc
+read -r rawcc
 
 # convert list of email addresses to command line options
 to_opts=""
@@ -92,7 +92,7 @@ opts="$send_opts $to_opts"
 
 # last possible point to abort!
 _disp "Proceed with patchbomb (this is the last chance to abort)? [y/N] "
-read n
+read -r n
 if [ "$n" != "y" ] && [ "$n" != "Y" ]; then
 	die "Aborting..."
 fi
@@ -112,7 +112,7 @@ fi
 
 # cleanup?
 _disp "Delete temporary directory? [Y/n] "
-read n
+read -r n
 
 [ "$n" = "n" ] || [ "$n" = "N" ] && exit 0
 rm -rf $dir

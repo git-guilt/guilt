@@ -52,7 +52,7 @@ case $1 in
 		guilt push "$top"
 		;;
 	-s|--series)
-		(get_full_series | while read patch; do
+		(get_full_series | while read -r patch; do
 			get_guards "$patch"
 		done) | tr ' ' '\n' | sort | uniq
 		;;

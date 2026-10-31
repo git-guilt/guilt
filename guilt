@@ -322,7 +322,7 @@ BEGIN {
 # Returns 0 if the patch should be pushed
 check_guards()
 {
-	get_guards "$1" | while read guard; do
+	get_guards "$1" | while read -r guard; do
 		case "$guard" in
 			+*)
 				# Push +guard *only if* guard selected
@@ -615,7 +615,7 @@ remove_patch_refs()
 			git update-ref --stdin -z
 	else
 		# old, slow
-		while read pname; do
+		while read -r pname; do
 			remove_ref "refs/patches/$branch/$pname"
 		done
 	fi
@@ -682,7 +682,7 @@ commit()
 		cd_to_toplevel_cached
 
 		if $3; then
-			git diff-files --no-ext-diff --name-only | while read n; do git update-index "$n" ; done
+			git diff-files --no-ext-diff --name-only | while read -r n; do git update-index "$n" ; done
 		fi
 
 		# grab a commit message out of the patch
@@ -725,7 +725,7 @@ commit()
 		fi
 
 		if [ ! -z "$author_str" ]; then
-			read GIT_AUTHOR_NAME <<EOF
+			read -r GIT_AUTHOR_NAME <<EOF
 ${author_str%%<*}
 EOF
 			export GIT_AUTHOR_NAME="${GIT_AUTHOR_NAME:-" "}"

@@ -22,7 +22,7 @@ case $# in
 			usage
 		fi
 
-		while read pname; do
+		while read -r pname; do
 			git show-ref "refs/patches/$branch/$pname"
 		done < "$applied" | sed -e "s,refs/patches/$branch/,,"
 	;;
