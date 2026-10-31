@@ -1,0 +1,17 @@
+% setup_git_repo
+% git tag base
+% git add a
+% git commit -m This subject line is deliberately made much longer than eighty characters to test truncation
+[master 5f4d934] This subject line is deliberately made much longer than eighty characters to test truncation
+ Author: Author Name <author@email>
+ 1 file changed, 1 insertion(+)
+ create mode 100644 a
+% guilt init
+% guilt import-commit base..HEAD
+About to begin conversion...
+Current head: 5f4d934ea862c6d6b9014e3be5b6285aa0da3d91
+Converting 5f4d934e as this_subject_line_is_deliberately_made_much_longer_than_eighty_characters_to_tes
+Done.
+Current head: d4850419ccc1146c7169f500725ce504b9774ed0
+% guilt series
+this_subject_line_is_deliberately_made_much_longer_than_eighty_characters_to_tes.patch
