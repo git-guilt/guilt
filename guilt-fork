@@ -32,8 +32,8 @@ if [ $# -eq 1 ]; then
 	newpatch="$1"
 else
 	base=$(echo "$patch" \
-		| sed -r -e 's:(\.diff?|\.patch)$::')
-	num=$(echo "$base" | sed -nre 's:.*-([0-9]+)$:\1:'p)
+		| sed -E -e 's:(\.diff?|\.patch)$::')
+	num=$(echo "$base" | sed -n -E -e 's:.*-([0-9]+)$:\1:'p)
 	[ -n "$num" ] || num=1
 	newpatch="${base%-$num}-$(( $num + 1 ))${patch#$base}"
 fi
