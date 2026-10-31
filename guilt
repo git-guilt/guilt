@@ -223,7 +223,7 @@ valid_patchname()
 	# aims to support Git version 1.5.0 and newer.
 
 	# Git 1.7.6.4 and newer rejects the DEL character.
-	if [ `echo "$1"|tr -d '\177'` != "$1" ]; then
+	if [ "`printf '%s' "$1" | tr -d '\177'`" != "$1" ]; then
 		return 1
 	fi
 
