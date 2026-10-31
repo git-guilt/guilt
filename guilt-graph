@@ -21,7 +21,7 @@ while [ $# -ge 2 ]; do
 	if [ "$1" != "-x" ]; then
 		break
 	fi
-	echo "$2" >> "$xclude"
+	disp "$2" >> "$xclude"
 	shift
 	shift
 done
@@ -79,7 +79,7 @@ while [ "$current" != "$base" ]; do
 
 	getfiles $current | grep -v -f "$xclude" | while read f; do
 		# hash the filename
-		fh=`echo "$f" | sha1 | cut -d' ' -f1`
+		fh=`disp "$f" | sha1 | cut -d' ' -f1`
 		if [ -e "$cache/$fh" ]; then
 			# ok, something already touched this file before us
 			cat "$cache/$fh" >> "$cache/dep"

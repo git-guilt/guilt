@@ -78,7 +78,7 @@ for rev in `git rev-list $rhash`; do
 		fname=x
 	fi
 
-	disp "Converting `echo $rev | cut -c 1-8` as $fname"
+	disp "Converting `disp "$rev" | cut -c 1-8` as $fname"
 
 	mangle_prefix=1
 	fname_base=$fname

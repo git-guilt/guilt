@@ -69,7 +69,7 @@ git merge --no-commit $upstream > /dev/null 2> /dev/null
 
 disp ""
 log=`git log -1 --no-decorate --pretty=oneline`
-disp "HEAD is now at `echo $log | cut -c 1-7`... `echo "$log" | cut -c 41-`"
+disp "HEAD is now at `disp "$log" | cut -c 1-7`... `disp "$log" | cut -c 41-`"
 
 #
 # For each previously applied patch:

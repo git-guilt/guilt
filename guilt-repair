@@ -34,14 +34,14 @@ repair_status()
 	printf "" > "$applied.new"
 
 	while read line ; do
-		hash=`echo "$line" | cut -d: -f1`
-		pname=`echo "$line" | cut -d: -f2-`
+		hash=`disp "$line" | cut -d: -f1`
+		pname=`disp "$line" | cut -d: -f2-`
 
-		npname=`echo "$pname" | sed -e 's/ /-/g'`
+		npname=`disp "$pname" | sed -e 's/ /-/g'`
 		[ "$pname" != "$npname" -a -e "$npname" ] && die "Patch name collision"
 
 		git update-ref "refs/patches/$branch/$npname" "$hash"
-		echo "$npname" >> "$applied.new"
+		disp "$npname" >> "$applied.new"
 
 		if [ "$pname" != "$npname" ]; then
 			series_rename_patch "$pname" "$npname"
