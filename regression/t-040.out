@@ -1,0 +1,28 @@
+% setup_repo
+% guilt push -a
+Applying patch..modify
+Patch applied.
+Applying patch..add
+Patch applied.
+Applying patch..remove
+Patch applied.
+Applying patch..mode
+Patch applied.
+% guilt status
+? dir/untracked2
+? untracked1
+M def
+% guilt status -x
+? dir/untracked2
+? untracked1
+% guilt status -m
+M def
+% guilt status -n
+dir/untracked2
+untracked1
+def
+% guilt init
+% git add a sub/b
+% guilt status
+A a
+A sub/b
