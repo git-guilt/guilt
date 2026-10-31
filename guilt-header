@@ -48,7 +48,7 @@ esac
 [ -z "$patch" ] && die "No patches applied."
 
 # check that patch exists in the series
-TMP_FULL_SERIES=`get_tmp_file series`
+get_tmp_file TMP_FULL_SERIES series
 get_full_series > "$TMP_FULL_SERIES"
 found_patch=
 while read x; do
@@ -58,7 +58,7 @@ while read x; do
 	fi
 done < "$TMP_FULL_SERIES"
 if [ -z "$found_patch" ]; then
-	TMP_MATCHES=`get_tmp_file series`
+	get_tmp_file TMP_MATCHES series
 	grep "$patch" < "$TMP_FULL_SERIES" > "$TMP_MATCHES"
 	nr=`wc -l < $TMP_MATCHES`
 	if [ $nr -gt 1 ]; then
@@ -78,8 +78,8 @@ patch="$found_patch"
 
 # FIXME: warn if we're editing an applied patch
 
-TMP_MSG=`get_tmp_file msg`
-TMP_DIFF=`get_tmp_file diff`
+get_tmp_file TMP_MSG msg
+get_tmp_file TMP_DIFF diff
 
 if [ -z "$edit" ]; then
 	do_get_header "$GUILT_DIR/$branch/$patch"
