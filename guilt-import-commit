@@ -69,7 +69,7 @@ for rev in `git rev-list $rhash`; do
 	if ! valid_patchname "$fname"; then
 		# Try harder to make it a legal commit name by
 		# removing all but a few safe characters.
-		fname=`echo $fname|tr -d -c _a-zA-Z0-9---/\\n`
+		fname=`printf '%s\n' "$fname" | tr -d -c '_a-zA-Z0-9/\n-'`
 	fi
 	if ! valid_patchname "$fname"; then
 		# If we failed to derive a legal patch name, use the
