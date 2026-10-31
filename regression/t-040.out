@@ -9,20 +9,27 @@ Patch applied.
 Applying patch..mode
 Patch applied.
 % guilt status
+? back\slash
 ? dir/untracked2
+? un tracked
 ? untracked1
 M def
 % guilt status -x
+? back\slash
 ? dir/untracked2
+? un tracked
 ? untracked1
 % guilt status -m
 M def
 % guilt status -n
+back\slash
 dir/untracked2
+un tracked
 untracked1
 def
 % guilt init
-% git add a sub/b
+% git add a sub/b sp ace
 % guilt status
 A a
+A sp ace
 A sub/b

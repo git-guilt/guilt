@@ -13,6 +13,9 @@ echo x > untracked1
 mkdir -p dir
 echo y > dir/untracked2
 echo z >> def
+# Names with spaces and backslashes must be printed unchanged.
+echo s > "un tracked"
+echo t > 'back\slash'
 cmd guilt status
 cmd guilt status -x
 cmd guilt status -m
@@ -26,5 +29,6 @@ cmd guilt init
 echo a > a
 mkdir sub
 echo b > sub/b
-cmd git add a sub/b
+echo c > "sp ace"
+cmd git add a sub/b "sp ace"
 cmd guilt status

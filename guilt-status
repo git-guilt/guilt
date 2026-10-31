@@ -108,10 +108,10 @@ git rev-parse --verify HEAD >/dev/null 2>&1 || IS_INITIAL=t
 	else
 		# initial commit
 		git ls-files | sed -e "s/^/A	/"
-	fi | sed -e '
-		s/\\/\\\\/g
-		s/ /\\ /g
-	'
-) | print_status
+	fi
+) | sed -e '
+	s/\\/\\\\/g
+	s/ /\\ /g
+' | print_status
 
 }
