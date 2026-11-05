@@ -28,11 +28,6 @@ fi
 
 need_work_tree
 
-# make sure that there are no unapplied changes
-if ! must_commit_first; then
-	die "Uncommited changes detected. Refresh first."
-fi
-
 if [ ! -e "$oldname" ]; then
 	die "Specified file does not exist."
 fi

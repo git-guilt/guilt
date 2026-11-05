@@ -117,6 +117,8 @@ case "$1" in
 		;;
 esac
 
+need_head
+
 oldrev=`git show-ref -s "refs/heads/\`git_branch\`"`
 
 case "$repair" in

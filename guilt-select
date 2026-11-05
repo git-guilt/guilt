@@ -22,9 +22,9 @@ select_guards()
 _main() {
 
 # Since this command sometimes invoke push and/or pop, it won't work
-# without a work tree, at least in those cases.  Require it always,
-# for consistency.
-need_work_tree
+# without a work tree and a commit, at least in those cases.  Require
+# it always, for consistency.
+need_head
 
 if [ $# -eq 0 ]; then
 	if [ -s "$guards_file" ]; then
