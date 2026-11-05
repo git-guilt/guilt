@@ -49,7 +49,7 @@ trap main_cleanup 0
 create_tmpdir()
 {
 	if [ -z "$tmpdir" ]; then
-		tmpdir=$(get_tmp_file tmpdir -d)
+		get_tmp_file tmpdir tmpdir -d
 	fi
 }
 
@@ -837,9 +837,9 @@ fold_patch()
 	(
 		pcur="$GUILT_DIR/$branch/$2"
 		pnext="$GUILT_DIR/$branch/$1"
-		TMP_CUR=`get_tmp_file diff-cur`
-		TMP_NEXT=`get_tmp_file diff-next`
-		TMP_DIFF=`get_tmp_file diff`
+		get_tmp_file TMP_CUR diff-cur
+		get_tmp_file TMP_NEXT diff-next
+		get_tmp_file TMP_DIFF diff
 		do_get_full_header "$pcur" > "$TMP_CUR"
 		do_get_full_header "$pnext" > "$TMP_NEXT"
 		do_get_patch "$pcur" > "$TMP_DIFF"
@@ -888,7 +888,7 @@ __refresh_patch()
 	assert_head_check
 
 	(
-		TMP_DIFF=`get_tmp_file diff`
+		get_tmp_file TMP_DIFF diff
 
 		cd_to_toplevel_cached
 		p="$GUILT_DIR/$branch/$1"
@@ -964,14 +964,16 @@ munge_hash_range()
 	return 0
 }
 
-# usage: get_tmp_file <prefix> [<opts>]
+# usage: get_tmp_file <var> <prefix> [<opts>]
 #
-# Get a unique filename and create the file in a non-racy way
+# Get a unique filename, create the file in a non-racy way, and store
+# its name in the variable <var>.  The name is not printed, as calling
+# this in a command substitution would run die in a subshell.
 get_tmp_file()
 {
-	while true; do
-		mktemp ${2:-} "/tmp/guilt.$1.XXXXXXXXXXXXXXX" && break
-	done
+	__tmp=`mktemp ${3:-} "/tmp/guilt.$2.XXXXXXXXXXXXXXX"` ||
+		die "Cannot create a temporary file"
+	eval "$1=\$__tmp"
 }
 
 # usage: guilt_hook <hook name> <args....>
