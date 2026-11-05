@@ -51,7 +51,7 @@ esac
 TMP_FULL_SERIES=`get_tmp_file series`
 get_full_series > "$TMP_FULL_SERIES"
 found_patch=
-while read x; do
+while read -r x; do
 	if [ "$x" = "$patch" ]; then
 		found_patch="$patch"
 		break

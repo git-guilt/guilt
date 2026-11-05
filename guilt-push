@@ -125,7 +125,7 @@ if [ "$sidx" -gt "$eidx" ]; then
 fi
 
 create_tmpdir
-get_series | sed -n -e "${sidx},${eidx}p" | while read p
+get_series | sed -n -e "${sidx},${eidx}p" | while read -r p
 do
 	disp "Applying patch..$p"
 	if [ ! -f "$GUILT_DIR/$branch/$p" ]; then

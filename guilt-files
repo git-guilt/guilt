@@ -39,7 +39,7 @@ if [ -n "$opt_all" ]; then
 	cat "$applied"
 else
 	tail -n 1 "$applied"
-fi | while read patch; do
+fi | while read -r patch; do
 	obj=`git rev-parse refs/patches/$branch/$patch`
 
 	# shamelessly taken from Quilt(quilt/quilt/files)
@@ -59,7 +59,7 @@ fi | while read patch; do
 			git diff-index --no-ext-diff HEAD^
 		fi
 	) | tr '\t' ' '|
-	while read omode nmode osha1 nsha1 st file; do
+	while read -r omode nmode osha1 nsha1 st file; do
 		if [ -n "$opt_labels" ]; then
 			if [ -n "$opt_verbose" ]; then
 				_disp "[$patch] "

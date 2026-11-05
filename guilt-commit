@@ -34,7 +34,7 @@ esac
 [ `wc -l < "$applied"` -eq 0 ] && exit 0
 
 # remove patch refs for what's being committed, and update series
-sed -n -e "${pat_commit}" "$applied" | while read pname; do
+sed -n -e "${pat_commit}" "$applied" | while read -r pname; do
 	# update the base branch to the last committed patch
 	$old_style_prefix || git update-ref "refs/heads/$branch" \
 				"refs/patches/$branch/$pname"
