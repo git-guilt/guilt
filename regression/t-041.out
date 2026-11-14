@@ -1,0 +1,66 @@
+% setup_repo
+% guilt push -n 3
+Applying patch..modify
+Patch applied.
+Applying patch..add
+Patch applied.
+Applying patch..remove
+Patch applied.
+% failing_mktemp guilt refresh
+Cannot create a temporary file
+% failing_mktemp guilt header
+Cannot create a temporary file
+% list_files
+d .git/patches
+d .git/patches/master
+f 22930c6d1f1938f298a4fca51c57e4b47171db21  .git/patches/master/mode
+f 413390f3906f16f30b054a4fb86c1e014b964504  .git/patches/master/remove
+f 9c18cc7abe6b87f18503714a80a677b4094eb457  .git/patches/master/add
+f bacb4aad8a55fe4e7aa58a9ae169990bb764069f  .git/patches/master/series
+f bc9ab2e0f5db99d483961e956e814d963f0309f8  .git/patches/master/modify
+f f322f08d907e3737a4321b0ec90bc545f71af7cf  .git/patches/master/status
+r 33633e7a1aa31972f125878baf7807be57b1672d  .git/refs/patches/master/modify
+r 37d588cc39848368810e88332bd03b083f2ce3ac  .git/refs/patches/master/add
+r ffb7faa126a6d91bcdd44a494f76b96dd860b8b9  .git/refs/patches/master/remove
+% guilt refresh
+Patch remove refreshed
+% guilt pop
+Now at add.
+% guilt push
+Applying patch..remove
+Patch applied.
+% guilt header
+% failing_mktemp guilt fold mode
+Cannot create a temporary file
+% list_files
+d .git/patches
+d .git/patches/master
+f 22930c6d1f1938f298a4fca51c57e4b47171db21  .git/patches/master/mode
+f 413390f3906f16f30b054a4fb86c1e014b964504  .git/patches/master/remove~
+f 9c18cc7abe6b87f18503714a80a677b4094eb457  .git/patches/master/add
+f bacb4aad8a55fe4e7aa58a9ae169990bb764069f  .git/patches/master/series
+f bc9ab2e0f5db99d483961e956e814d963f0309f8  .git/patches/master/modify
+f f322f08d907e3737a4321b0ec90bc545f71af7cf  .git/patches/master/status
+f f7922641e74b7d668b41eccb250a64c7fc05d8d4  .git/patches/master/remove
+r 33633e7a1aa31972f125878baf7807be57b1672d  .git/refs/patches/master/modify
+r 37d588cc39848368810e88332bd03b083f2ce3ac  .git/refs/patches/master/add
+r ab40bedd7692da1cf2af5b3df7459ecf1405ea46  .git/refs/patches/master/remove
+% guilt fold mode
+% guilt pop
+Now at add.
+% guilt push
+Applying patch..remove
+Patch applied.
+% list_files
+d .git/patches
+d .git/patches/master
+f 22930c6d1f1938f298a4fca51c57e4b47171db21  .git/patches/master/mode~
+f 3100bd8fa96a5df384589592ee01bb08500e7fcf  .git/patches/master/remove
+f 9c18cc7abe6b87f18503714a80a677b4094eb457  .git/patches/master/add
+f bc9ab2e0f5db99d483961e956e814d963f0309f8  .git/patches/master/modify
+f f322f08d907e3737a4321b0ec90bc545f71af7cf  .git/patches/master/status
+f f7922641e74b7d668b41eccb250a64c7fc05d8d4  .git/patches/master/remove~
+f f819c9abb712af6e42af30044bc5388d454ab0cb  .git/patches/master/series
+r 267929c8177263d9ff0af2b99671d7ff60d7146f  .git/refs/patches/master/remove
+r 33633e7a1aa31972f125878baf7807be57b1672d  .git/refs/patches/master/modify
+r 37d588cc39848368810e88332bd03b083f2ce3ac  .git/refs/patches/master/add
